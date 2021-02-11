@@ -315,10 +315,11 @@ namespace EasyChannelPacking
                 pack.bmpG = (Bitmap)inputImageG.GetImage;
                 pack.bmpB = (Bitmap)inputImageB.GetImage;
                 pack.bmpA = (Bitmap)inputImageA.GetImage;
-                pack.bmpPack = new Bitmap(pack.bmpR.Width, pack.bmpR.Height);
+                
 
                 if (pack.bmpR != null)
                 {
+                    pack.bmpPack = new Bitmap(pack.bmpR.Width, pack.bmpR.Height);
                     backgroundWorker1.RunWorkerAsync(pack);
                 }
             }
