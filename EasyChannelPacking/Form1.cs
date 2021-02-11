@@ -15,6 +15,18 @@ namespace EasyChannelPacking
 {
     public partial class FormEasyChannelPacking : Form
     {
+        struct Pack
+        {
+           public Bitmap bmpR;
+           public Bitmap bmpG;
+           public Bitmap bmpB;
+           public Bitmap bmpA;
+           public Bitmap bmpPack;
+            public bool Sucess;
+        }
+
+        Pack pack;
+
         public FormEasyChannelPacking()
         {
             InitializeComponent();
@@ -23,28 +35,22 @@ namespace EasyChannelPacking
         private void button1_Click(object sender, EventArgs e)
         {
             
-            bmpR = (Bitmap)inputImageR.myImage;
-            bmpG = (Bitmap)inputImageG.myImage;
-            bmpB = (Bitmap)inputImageB.myImage;
-            bmpA = (Bitmap)inputImageA.myImage;
-            bmpPack = new Bitmap(bmpR.Width, bmpR.Height);
 
-            myStringR = inputChannelR.GetItemText(inputChannelR.SelectedItem);
-            myStringG = inputChannelG.GetItemText(inputChannelG.SelectedItem);
-            myStringB = inputChannelB.GetItemText(inputChannelB.SelectedItem);
-            myStringA = inputChannelA.GetItemText(inputChannelA.SelectedItem);
+            //myStringR = inputImageR.Channel; //inputChannelR.GetItemText(inputChannelR.SelectedItem);
+            //myStringG = inputImageG.Channel; //inputChannelG.GetItemText(inputChannelG.SelectedItem);
+            //myStringB = inputImageB.Channel; //inputChannelB.GetItemText(inputChannelB.SelectedItem);
+            //myStringA = inputImageA.Channel; //inputChannelA.GetItemText(inputChannelA.SelectedItem);
 
-            if (!backgroundWorker1.IsBusy)
-            {
-                backgroundWorker1.RunWorkerAsync();
-            }
+            //invertR = inputImageR.Invert;
+            //invertG = inputImageG.Invert;
+            //invertB = inputImageB.Invert;
+            //invertA = inputImageA.Invert;
+
+            timerProcessa.Enabled = false;
+            timerProcessa.Enabled = true;
         }
 
-        Bitmap bmpR;
-        Bitmap bmpG;
-        Bitmap bmpB;
-        Bitmap bmpA;
-        Bitmap bmpPack;
+       
 
         Bitmap bmpUnpack;
         Bitmap bmpUnpackR;
@@ -52,134 +58,47 @@ namespace EasyChannelPacking
         Bitmap bmpUnpackB;
         Bitmap bmpUnpackA;
 
-        string myStringR;
-        string myStringG;
-        string myStringB;
-        string myStringA;
-
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            Pack p = (Pack)e.Argument;
+
             int progress = 0;
-            int totalprogress = bmpR.Width* bmpR.Height;
+            int totalprogress = p.bmpR.Width* p.bmpR.Height;
             int percent;
 
             Color rX;
             Color gX;
             Color bX;
             Color aX;
-            Byte rC;
-            Byte gC;
-            Byte bC;
-            Byte aC;
 
-
-            for (int i = 0; i < bmpR.Width; i++)
+            for (int i = 0; i < p.bmpR.Width; i++)
             {
-                for (int j = 0; j < bmpR.Height; j++)
+                for (int j = 0; j < p.bmpR.Height; j++)
                 {
-                    rX = bmpR.GetPixel(i, j);
-                    gX = bmpG.GetPixel(i, j);
-                    bX = bmpB.GetPixel(i, j);
-                    aX = bmpA.GetPixel(i, j);
+                    rX = p.bmpR != null && p.bmpR.Width > i && p.bmpR.Height > j ? p.bmpR?.GetPixel(i, j) ?? Color.FromArgb(255,0,0,0) : Color.FromArgb(255, 0, 0, 0);
+                    gX = p.bmpG != null && p.bmpG.Width > i && p.bmpG.Height > j ? p.bmpG?.GetPixel(i, j) ?? Color.FromArgb(255,0,0,0) : Color.FromArgb(255, 0, 0, 0);
+                    bX = p.bmpB != null && p.bmpB.Width > i && p.bmpB.Height > j ? p.bmpB?.GetPixel(i, j) ?? Color.FromArgb(255,0,0,0) : Color.FromArgb(255, 0, 0, 0);
+                    aX = p.bmpA != null && p.bmpA.Width > i && p.bmpA.Height > j ? p.bmpA?.GetPixel(i, j) ?? Color.FromArgb(255,0,0,0) : Color.FromArgb(255, 0, 0, 0);
 
-                    //SELECT CHANNEL FROM IMAGE R
-                    if (myStringR == "G")
-                    {
-                        rC = rX.G;
-                    }
-                    else if (myStringR == "B")
-                    {
-                        rC = rX.B;
-                    }
-                    else if (myStringR == "A")
-                    {
-                        rC = rX.A;
-                    }
-                    else
-                    {
-                        rC = rX.R;
-                    }
-                    //END
-                    //SELECT CHANNEL FROM IMAGE G
-                    if (myStringG == "G")
-                    {
-                        gC = gX.G;
-                    }
-                    else if (myStringG == "B")
-                    {
-                        gC = gX.B;
-                    }
-                    else if (myStringG == "A")
-                    {
-                        gC = gX.A;
-                    }
-                    else
-                    {
-                        gC = gX.R;
-                    }
-                    //END
-                    //SELECT CHANNEL FROM IMAGE B
-                    if (myStringB == "G")
-                    {
-                        bC = bX.G;
-                    }
-                    else if (myStringB == "B")
-                    {
-                        bC = bX.B;
-                    }
-                    else if (myStringB == "A")
-                    {
-                        bC = bX.A;
-                    }
-                    else
-                    {
-                        bC = bX.R;
-                    }
-                    //END
-                    //SELECT CHANNEL FROM IMAGE A
-                    if (myStringA == "G")
-                    {
-                        aC = aX.G;
-                    }
-                    else if (myStringA == "B")
-                    {
-                        aC = aX.B;
-                    }
-                    else if (myStringA == "A")
-                    {
-                        aC = aX.A;
-                    }
-                    else
-                    {
-                        aC = aX.R;
-                    }
-                    //END
-                    //CHECK IS INVERTED
-                    if (invertR.Checked)
-                    {
-                        rC = (byte)(255 - (int)rC);
-                    }
-                    if (invertG.Checked)
-                    {
-                        gC = (byte)(255 - (int)gC);
-                    }
-                    if (invertB.Checked)
-                    {
-                        bC = (byte)(255 - (int)bC);
-                    }
-                    if (invertA.Checked)
-                    {
-                        aC = (byte)(255 - (int)aC);
-                    }
-
-                    bmpPack.SetPixel(i, j, Color.FromArgb(aC, rC, gC, bC));
+                    p.bmpPack.SetPixel(i, j, Color.FromArgb(aX.A, rX.R, gX.G, bX.B));
 
                     progress++;
-                    percent = (progress*100)/ totalprogress;
-                    backgroundWorker1.ReportProgress(percent);
+
+                    
+                    if (e.Cancel)
+                        break;
                 }
+
+                percent = (progress * 100) / totalprogress;
+                backgroundWorker1.ReportProgress(percent);
+
+                if (e.Cancel)
+                    break;
             }
 
+            p.Sucess = !e.Cancel;
+
+            e.Result = p;
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -190,10 +109,26 @@ namespace EasyChannelPacking
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             progressBar1.Value = 0;
-            outBox.Image = bmpPack;
-            outBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            SaveButton.Visible = true;
-            //Image a = outBox.Image.RedimensionarImagem()
+
+            if (e.Error == null)
+            {
+                pack = (Pack)e.Result;
+
+                if (pack.Sucess)
+                {
+                    outBox.Image = pack.bmpPack;
+                    SaveButton.Visible = true;
+                }
+                else
+                {
+                    timerProcessa.Enabled = false;
+                    timerProcessa.Enabled = true;
+                }
+            }
+            else
+            {
+                MessageBox.Show(e.Error.Message, "Erro ao processar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -205,24 +140,9 @@ namespace EasyChannelPacking
                 diag.FileName = "packed.png";
                 if(diag.ShowDialog() == DialogResult.OK)
                 {
-                    bmpPack.Save(diag.FileName, ImageFormat.Png);
+                   pack.bmpPack.Save(diag.FileName, ImageFormat.Png);
                 }
             }
-        }
-
-        private void invertG_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void inputImageR_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox5_Enter(object sender, EventArgs e)
-        {
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -234,10 +154,10 @@ namespace EasyChannelPacking
             bmpUnpackB = new Bitmap(bmpUnpack.Width, bmpUnpack.Height);
             bmpUnpackA = new Bitmap(bmpUnpack.Width, bmpUnpack.Height);
 
-            myStringR = inputChannelR.GetItemText(inputChannelR.SelectedItem);
-            myStringG = inputChannelG.GetItemText(inputChannelG.SelectedItem);
-            myStringB = inputChannelB.GetItemText(inputChannelB.SelectedItem);
-            myStringA = inputChannelA.GetItemText(inputChannelA.SelectedItem);
+            //myStringR = inputImageR.Channel;//inputChannelR.GetItemText(inputChannelR.SelectedItem);
+            //myStringG = inputImageG.Channel;//inputChannelG.GetItemText(inputChannelG.SelectedItem);
+            //myStringB = inputImageB.Channel;//inputChannelB.GetItemText(inputChannelB.SelectedItem);
+            //myStringA = inputImageA.Channel;// inputChannelA.GetItemText(inputChannelA.SelectedItem);
 
             if (!backgroundWorker2.IsBusy)
             {
@@ -245,10 +165,7 @@ namespace EasyChannelPacking
             }
         }
 
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -352,9 +269,63 @@ namespace EasyChannelPacking
             }
         }
 
-        private void label11_Click(object sender, EventArgs e)
-        {
 
+        private void inputImageR_ImageProcessComplete(object sender, EventArgs e)
+        {
+            
+            timerProcessa.Enabled = false;
+            timerProcessa.Enabled = true;
+            
+        }
+
+        private void inputImageR_ChannelChanged(object sender, EventArgs e)
+        {
+            timerProcessa.Enabled = false;
+            timerProcessa.Enabled = true;
+        }
+
+        private void comboBoxImageMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxImageMode.SelectedIndex == 1)
+            {
+                outBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+            else if (comboBoxImageMode.SelectedIndex == 2)
+            {
+                outBox.SizeMode = PictureBoxSizeMode.CenterImage;
+            }
+            else if (comboBoxImageMode.SelectedIndex == 3)
+            {
+                outBox.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+            else
+            {
+                outBox.SizeMode = PictureBoxSizeMode.Normal;
+            }
+        }
+
+        private void timerProcessa_Tick(object sender, EventArgs e)
+        {
+            timerProcessa.Enabled = false;
+            if (!backgroundWorker1.IsBusy)
+            {
+                pack = new Pack();
+
+                pack.bmpR = (Bitmap)inputImageR.GetImage;
+                pack.bmpG = (Bitmap)inputImageG.GetImage;
+                pack.bmpB = (Bitmap)inputImageB.GetImage;
+                pack.bmpA = (Bitmap)inputImageA.GetImage;
+                pack.bmpPack = new Bitmap(pack.bmpR.Width, pack.bmpR.Height);
+
+                if (pack.bmpR != null)
+                {
+                    backgroundWorker1.RunWorkerAsync(pack);
+                }
+            }
+            else
+            {
+                backgroundWorker1.CancelAsync();
+            }
         }
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

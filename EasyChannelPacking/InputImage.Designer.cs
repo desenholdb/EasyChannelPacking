@@ -30,7 +30,16 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputImage));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.checkBoxinvert = new System.Windows.Forms.CheckBox();
+            this.comboChannel = new System.Windows.Forms.ComboBox();
+            this.backgroundWorkerProcessaImagem = new System.ComponentModel.BackgroundWorker();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.buttonClear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -41,9 +50,9 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 37);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(150, 150);
+            this.pictureBox1.Size = new System.Drawing.Size(166, 153);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -51,13 +60,98 @@
             this.pictureBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBox1_DragDrop);
             this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.pictureBox1);
+            this.groupBox1.Controls.Add(this.panel1);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(172, 193);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "InputImage";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.buttonClear);
+            this.panel1.Controls.Add(this.checkBoxinvert);
+            this.panel1.Controls.Add(this.comboChannel);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(3, 16);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(166, 21);
+            this.panel1.TabIndex = 1;
+            // 
+            // checkBoxinvert
+            // 
+            this.checkBoxinvert.AutoSize = true;
+            this.checkBoxinvert.Dock = System.Windows.Forms.DockStyle.Left;
+            this.checkBoxinvert.Location = new System.Drawing.Point(60, 0);
+            this.checkBoxinvert.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
+            this.checkBoxinvert.Name = "checkBoxinvert";
+            this.checkBoxinvert.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.checkBoxinvert.Size = new System.Drawing.Size(58, 21);
+            this.checkBoxinvert.TabIndex = 27;
+            this.checkBoxinvert.Text = "Invert";
+            this.checkBoxinvert.UseVisualStyleBackColor = true;
+            // 
+            // comboChannel
+            // 
+            this.comboChannel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.comboChannel.FormattingEnabled = true;
+            this.comboChannel.Items.AddRange(new object[] {
+            "R",
+            "G",
+            "B",
+            "A"});
+            this.comboChannel.Location = new System.Drawing.Point(0, 0);
+            this.comboChannel.Name = "comboChannel";
+            this.comboChannel.Size = new System.Drawing.Size(60, 21);
+            this.comboChannel.TabIndex = 26;
+            this.comboChannel.SelectedIndexChanged += new System.EventHandler(this.comboChannel_SelectedIndexChanged);
+            // 
+            // backgroundWorkerProcessaImagem
+            // 
+            this.backgroundWorkerProcessaImagem.WorkerReportsProgress = true;
+            this.backgroundWorkerProcessaImagem.WorkerSupportsCancellation = true;
+            this.backgroundWorkerProcessaImagem.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerProcessaImagem_DoWork);
+            this.backgroundWorkerProcessaImagem.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerProcessaImagem_ProgressChanged);
+            this.backgroundWorkerProcessaImagem.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerProcessaImagem_RunWorkerCompleted);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.progressBar1.Location = new System.Drawing.Point(0, 193);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(172, 5);
+            this.progressBar1.TabIndex = 2;
+            // 
+            // buttonClear
+            // 
+            this.buttonClear.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonClear.FlatAppearance.BorderSize = 0;
+            this.buttonClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonClear.Image = global::EasyChannelPacking.Properties.Resources.delete_sign_16;
+            this.buttonClear.Location = new System.Drawing.Point(144, 0);
+            this.buttonClear.Name = "buttonClear";
+            this.buttonClear.Size = new System.Drawing.Size(22, 21);
+            this.buttonClear.TabIndex = 28;
+            this.buttonClear.UseVisualStyleBackColor = true;
+            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
+            // 
             // InputImage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.progressBar1);
             this.Name = "InputImage";
+            this.Size = new System.Drawing.Size(172, 198);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -65,5 +159,12 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.CheckBox checkBoxinvert;
+        private System.Windows.Forms.ComboBox comboChannel;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerProcessaImagem;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button buttonClear;
     }
 }
