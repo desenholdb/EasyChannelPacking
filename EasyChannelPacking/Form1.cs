@@ -65,7 +65,7 @@ namespace EasyChannelPacking
             int progress = 0;
             int totalprogress = p.bmpR.Width* p.bmpR.Height;
             int percent;
-
+            bool report = true;
             Color rX;
             Color gX;
             Color bX;
@@ -89,8 +89,12 @@ namespace EasyChannelPacking
                         break;
                 }
 
-                percent = (progress * 100) / totalprogress;
-                backgroundWorker1.ReportProgress(percent);
+                report = !report;
+                if (report)
+                {
+                    percent = (progress * 100) / totalprogress;
+                    backgroundWorker1.ReportProgress(percent);
+                }
 
                 if (e.Cancel)
                     break;
@@ -326,6 +330,8 @@ namespace EasyChannelPacking
             else
             {
                 backgroundWorker1.CancelAsync();
+                timerProcessa.Enabled = false;
+                timerProcessa.Enabled = true;
             }
         }
 

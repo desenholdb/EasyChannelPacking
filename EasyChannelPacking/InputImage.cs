@@ -135,11 +135,12 @@ namespace EasyChannelPacking
                 bmpG = new Bitmap(bmpR);
                 bmpB = new Bitmap(bmpR);
                 bmpA = new Bitmap(bmpR);
-
+                int total = ImgCache.Width * ImgCache.Height;
+                bool report = true;
                 int p = 0;
-                for (int x = 0; x < bmpR.Width; x++)
+                for (int x = 0; x < ImgCache.Width; x++)
                 {
-                    for (int y = 0; y < bmpR.Height; y++)
+                    for (int y = 0; y < ImgCache.Height; y++)
                     {
                         pixel = ImgCache.GetPixel(x, y);
 
@@ -168,7 +169,12 @@ namespace EasyChannelPacking
                        
                     }
 
-                    backgroundWorkerProcessaImagem.ReportProgress(p);
+                    report = !report;
+
+                    if (report)
+                    {
+                        backgroundWorkerProcessaImagem.ReportProgress((p * 100) / total);
+                    }
 
                     if (e.Cancel)
                     {
@@ -181,6 +187,7 @@ namespace EasyChannelPacking
 
         private void backgroundWorkerProcessaImagem_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            progressBar1.Value = 0;
             if (e.Error == null)
             {
                 if ((bool)e.Result == true)
@@ -203,7 +210,7 @@ namespace EasyChannelPacking
 
         private void backgroundWorkerProcessaImagem_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            progressBar1.Value = (e.ProgressPercentage * 100) / (myImage.Width * myImage.Height);
+            progressBar1.Value = e.ProgressPercentage;
         }
 
         private void comboChannel_SelectedIndexChanged(object sender, EventArgs e)
