@@ -28,15 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputImage));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonClear = new System.Windows.Forms.Button();
             this.checkBoxinvert = new System.Windows.Forms.CheckBox();
             this.comboChannel = new System.Windows.Forms.ComboBox();
             this.backgroundWorkerProcessaImagem = new System.ComponentModel.BackgroundWorker();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.buttonClear = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -83,17 +85,32 @@
             this.panel1.Size = new System.Drawing.Size(166, 21);
             this.panel1.TabIndex = 1;
             // 
+            // buttonClear
+            // 
+            this.buttonClear.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonClear.FlatAppearance.BorderSize = 0;
+            this.buttonClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonClear.Image = global::EasyChannelPacking.Properties.Resources.delete_sign_16;
+            this.buttonClear.Location = new System.Drawing.Point(144, 0);
+            this.buttonClear.Name = "buttonClear";
+            this.buttonClear.Size = new System.Drawing.Size(22, 21);
+            this.buttonClear.TabIndex = 28;
+            this.toolTip1.SetToolTip(this.buttonClear, "Clear Image");
+            this.buttonClear.UseVisualStyleBackColor = true;
+            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
+            // 
             // checkBoxinvert
             // 
             this.checkBoxinvert.AutoSize = true;
             this.checkBoxinvert.Dock = System.Windows.Forms.DockStyle.Left;
-            this.checkBoxinvert.Location = new System.Drawing.Point(60, 0);
+            this.checkBoxinvert.Location = new System.Drawing.Point(47, 0);
             this.checkBoxinvert.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
             this.checkBoxinvert.Name = "checkBoxinvert";
             this.checkBoxinvert.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.checkBoxinvert.Size = new System.Drawing.Size(58, 21);
             this.checkBoxinvert.TabIndex = 27;
             this.checkBoxinvert.Text = "Invert";
+            this.toolTip1.SetToolTip(this.checkBoxinvert, "Invert ");
             this.checkBoxinvert.UseVisualStyleBackColor = true;
             // 
             // comboChannel
@@ -107,7 +124,7 @@
             "A"});
             this.comboChannel.Location = new System.Drawing.Point(0, 0);
             this.comboChannel.Name = "comboChannel";
-            this.comboChannel.Size = new System.Drawing.Size(60, 21);
+            this.comboChannel.Size = new System.Drawing.Size(47, 21);
             this.comboChannel.TabIndex = 26;
             this.comboChannel.SelectedIndexChanged += new System.EventHandler(this.comboChannel_SelectedIndexChanged);
             // 
@@ -127,19 +144,6 @@
             this.progressBar1.Size = new System.Drawing.Size(172, 5);
             this.progressBar1.TabIndex = 2;
             // 
-            // buttonClear
-            // 
-            this.buttonClear.Dock = System.Windows.Forms.DockStyle.Right;
-            this.buttonClear.FlatAppearance.BorderSize = 0;
-            this.buttonClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonClear.Image = global::EasyChannelPacking.Properties.Resources.delete_sign_16;
-            this.buttonClear.Location = new System.Drawing.Point(144, 0);
-            this.buttonClear.Name = "buttonClear";
-            this.buttonClear.Size = new System.Drawing.Size(22, 21);
-            this.buttonClear.TabIndex = 28;
-            this.buttonClear.UseVisualStyleBackColor = true;
-            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
-            // 
             // InputImage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -148,6 +152,9 @@
             this.Controls.Add(this.progressBar1);
             this.Name = "InputImage";
             this.Size = new System.Drawing.Size(172, 198);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.InputImage_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.InputImage_DragEnter);
+            this.DragOver += new System.Windows.Forms.DragEventHandler(this.InputImage_DragOver);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -166,5 +173,6 @@
         private System.ComponentModel.BackgroundWorker backgroundWorkerProcessaImagem;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button buttonClear;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

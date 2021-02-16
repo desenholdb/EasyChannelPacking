@@ -15,7 +15,7 @@ namespace EasyChannelPacking
         
         public Image myImage;
 
-        
+        public Image initialImage;
         
         private Bitmap bmpA;
         private Bitmap bmpR;
@@ -57,6 +57,7 @@ namespace EasyChannelPacking
         {
             InitializeComponent();
             myImage = (Bitmap)pictureBox1.Image;
+            initialImage = myImage;
         }
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
@@ -107,7 +108,8 @@ namespace EasyChannelPacking
             bmpG =
             bmpB = null;
                 myImage = null;
-                pictureBox1.Image = null;
+                pictureBox1.Image = initialImage; 
+                
             }
             
 
@@ -225,6 +227,30 @@ namespace EasyChannelPacking
         {
             CarregarImagem(null);
             
+        }
+
+        private void InputImage_DragOver(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Link;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+        private void InputImage_DragEnter(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void InputImage_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            if (files.Length > 0)
+            {
+                string arquivo = files[0];
+                CarregarImagem(arquivo);
+            }
+
         }
     }
 }

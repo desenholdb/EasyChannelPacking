@@ -62,46 +62,57 @@ namespace EasyChannelPacking
         {
             Pack p = (Pack)e.Argument;
 
-            int progress = 0;
-            int totalprogress = p.bmpR.Width* p.bmpR.Height;
-            int percent;
-            bool report = true;
-            Color rX;
-            Color gX;
-            Color bX;
-            Color aX;
+            Bitmap bmpRef = pack.bmpR ?? pack.bmpG ?? pack.bmpB ?? pack.bmpA;
 
-            for (int i = 0; i < p.bmpR.Width; i++)
+            if (bmpRef != null)
             {
-                for (int j = 0; j < p.bmpR.Height; j++)
+                int progress = 0;
+                int totalprogress = bmpRef.Width * bmpRef.Height;
+                int percent;
+                bool report = true;
+                Color rX;
+                Color gX;
+                Color bX;
+                Color aX;
+
+                for (int i = 0; i < bmpRef.Width; i++)
                 {
-                    rX = p.bmpR != null && p.bmpR.Width > i && p.bmpR.Height > j ? p.bmpR?.GetPixel(i, j) ?? Color.FromArgb(255,0,0,0) : Color.FromArgb(255, 0, 0, 0);
-                    gX = p.bmpG != null && p.bmpG.Width > i && p.bmpG.Height > j ? p.bmpG?.GetPixel(i, j) ?? Color.FromArgb(255,0,0,0) : Color.FromArgb(255, 0, 0, 0);
-                    bX = p.bmpB != null && p.bmpB.Width > i && p.bmpB.Height > j ? p.bmpB?.GetPixel(i, j) ?? Color.FromArgb(255,0,0,0) : Color.FromArgb(255, 0, 0, 0);
-                    aX = p.bmpA != null && p.bmpA.Width > i && p.bmpA.Height > j ? p.bmpA?.GetPixel(i, j) ?? Color.FromArgb(255,0,0,0) : Color.FromArgb(255, 0, 0, 0);
+                    for (int j = 0; j < bmpRef.Height; j++)
+                    {
+                        rX = p.bmpR != null && p.bmpR.Width > i && p.bmpR.Height > j ? p.bmpR?.GetPixel(i, j) ?? Color.FromArgb(255, 0, 0, 0) : Color.FromArgb(255, 0, 0, 0);
+                        gX = p.bmpG != null && p.bmpG.Width > i && p.bmpG.Height > j ? p.bmpG?.GetPixel(i, j) ?? Color.FromArgb(255, 0, 0, 0) : Color.FromArgb(255, 0, 0, 0);
+                        bX = p.bmpB != null && p.bmpB.Width > i && p.bmpB.Height > j ? p.bmpB?.GetPixel(i, j) ?? Color.FromArgb(255, 0, 0, 0) : Color.FromArgb(255, 0, 0, 0);
+                        aX = p.bmpA != null && p.bmpA.Width > i && p.bmpA.Height > j ? p.bmpA?.GetPixel(i, j) ?? Color.FromArgb(255, 0, 0, 0) : Color.FromArgb(255, 0, 0, 0);
 
-                    p.bmpPack.SetPixel(i, j, Color.FromArgb(aX.A, rX.R, gX.G, bX.B));
+                        p.bmpPack.SetPixel(i, j, Color.FromArgb(aX.A, rX.R, gX.G, bX.B));
 
-                    progress++;
+                        progress++;
 
-                    
+
+                        if (e.Cancel)
+                            break;
+                    }
+
+                    report = !report;
+                    if (report)
+                    {
+                        percent = (progress * 100) / totalprogress;
+                        backgroundWorker1.ReportProgress(percent);
+                    }
+
                     if (e.Cancel)
                         break;
                 }
 
-                report = !report;
-                if (report)
-                {
-                    percent = (progress * 100) / totalprogress;
-                    backgroundWorker1.ReportProgress(percent);
-                }
+                p.Sucess = !e.Cancel;
 
-                if (e.Cancel)
-                    break;
+                
             }
-
-            p.Sucess = !e.Cancel;
-
+            else
+            {
+                p.Sucess = true;
+                
+            }
             e.Result = p;
         }
 
@@ -125,6 +136,7 @@ namespace EasyChannelPacking
                 }
                 else
                 {
+                    
                     timerProcessa.Enabled = false;
                     timerProcessa.Enabled = true;
                 }
@@ -319,11 +331,13 @@ namespace EasyChannelPacking
                 pack.bmpG = (Bitmap)inputImageG.GetImage;
                 pack.bmpB = (Bitmap)inputImageB.GetImage;
                 pack.bmpA = (Bitmap)inputImageA.GetImage;
-                
 
-                if (pack.bmpR != null)
+
+                Bitmap bmpRef = pack.bmpR ?? pack.bmpG ?? pack.bmpB ?? pack.bmpA;
+
+                if (bmpRef != null)
                 {
-                    pack.bmpPack = new Bitmap(pack.bmpR.Width, pack.bmpR.Height);
+                    pack.bmpPack = new Bitmap(bmpRef.Width, bmpRef.Height);
                     backgroundWorker1.RunWorkerAsync(pack);
                 }
             }
@@ -343,6 +357,33 @@ namespace EasyChannelPacking
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://www.linkedin.com/in/matheusdalla/");
+        }
+
+        private void flowLayoutPanel1_Resize(object sender, EventArgs e)
+        {
+            int newW = flowLayoutPanel1.Width / 4 - 15;
+            inputImageA.Width =
+                inputImageB.Width =
+                inputImageG.Width =
+                inputImageR.Width = newW;
+
+            inputImageA.Height  =
+                inputImageB.Height =
+                inputImageG.Height =
+                inputImageR.Height = flowLayoutPanel1.Height - 15;
+
+
+
+            //if (flowLayoutPanel1.Width < inputImageA.Width * 4)
+            //{
+            //    flowLayoutPanel1.Height = inputImageA.Height * 2 + 15;
+            //}
+            //else
+            //{
+
+            //    flowLayoutPanel1.Height = inputImageA.Height + 15;
+            //}
+
         }
     }
 }

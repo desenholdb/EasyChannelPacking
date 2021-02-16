@@ -40,10 +40,6 @@
             this.SaveButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.inputImageR = new EasyChannelPacking.InputImage();
-            this.inputImageG = new EasyChannelPacking.InputImage();
-            this.inputImageB = new EasyChannelPacking.InputImage();
-            this.inputImageA = new EasyChannelPacking.InputImage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -67,7 +63,6 @@
             this.saveR = new System.Windows.Forms.Button();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.buttonUnpack = new System.Windows.Forms.Button();
-            this.inputImageUnpack = new EasyChannelPacking.InputImage();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
@@ -77,6 +72,12 @@
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.panel1 = new System.Windows.Forms.Panel();
             this.timerProcessa = new System.Windows.Forms.Timer(this.components);
+            this.inputImageR = new EasyChannelPacking.InputImage();
+            this.inputImageG = new EasyChannelPacking.InputImage();
+            this.inputImageB = new EasyChannelPacking.InputImage();
+            this.inputImageA = new EasyChannelPacking.InputImage();
+            this.inputImageUnpack = new EasyChannelPacking.InputImage();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.outBox)).BeginInit();
@@ -96,6 +97,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.unpackOutR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -116,10 +121,9 @@
             // 
             this.tabPage1.AllowDrop = true;
             this.tabPage1.BackColor = System.Drawing.SystemColors.Window;
-            this.tabPage1.Controls.Add(this.outBox);
+            this.tabPage1.Controls.Add(this.splitContainer1);
             this.tabPage1.Controls.Add(this.progressBar1);
             this.tabPage1.Controls.Add(this.panel2);
-            this.tabPage1.Controls.Add(this.flowLayoutPanel1);
             this.tabPage1.ImageKey = "collect_24.png";
             this.tabPage1.Location = new System.Drawing.Point(4, 31);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -134,10 +138,10 @@
             this.outBox.BackColor = System.Drawing.Color.Gray;
             this.outBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.outBox.Image = ((System.Drawing.Image)(resources.GetObject("outBox.Image")));
-            this.outBox.Location = new System.Drawing.Point(4, 280);
+            this.outBox.Location = new System.Drawing.Point(0, 0);
             this.outBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.outBox.Name = "outBox";
-            this.outBox.Size = new System.Drawing.Size(1025, 456);
+            this.outBox.Size = new System.Drawing.Size(1025, 457);
             this.outBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.outBox.TabIndex = 16;
             this.outBox.TabStop = false;
@@ -220,88 +224,17 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.Controls.Add(this.inputImageR);
             this.flowLayoutPanel1.Controls.Add(this.inputImageG);
             this.flowLayoutPanel1.Controls.Add(this.inputImageB);
             this.flowLayoutPanel1.Controls.Add(this.inputImageA);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 5);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1025, 275);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1025, 270);
             this.flowLayoutPanel1.TabIndex = 48;
-            // 
-            // inputImageR
-            // 
-            this.inputImageR.AllowDrop = true;
-            this.inputImageR.BackColor = System.Drawing.Color.Red;
-            this.inputImageR.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.inputImageR.Caption = "Output R";
-            this.inputImageR.Channel = "R";
-            this.inputImageR.ChannelVisible = true;
-            this.inputImageR.Invert = false;
-            this.inputImageR.Location = new System.Drawing.Point(4, 5);
-            this.inputImageR.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.inputImageR.Name = "inputImageR";
-            this.inputImageR.Size = new System.Drawing.Size(240, 260);
-            this.inputImageR.TabIndex = 1;
-            this.inputImageR.ImageProcessComplete += new EasyChannelPacking.InputImage.ImageProcessCompleteEventHandler(this.inputImageR_ImageProcessComplete);
-            this.inputImageR.ChannelChanged += new EasyChannelPacking.InputImage.ChannelChangedEventHandler(this.inputImageR_ChannelChanged);
-            // 
-            // inputImageG
-            // 
-            this.inputImageG.AllowDrop = true;
-            this.inputImageG.BackColor = System.Drawing.Color.ForestGreen;
-            this.inputImageG.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("inputImageG.BackgroundImage")));
-            this.inputImageG.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.inputImageG.Caption = "Output G";
-            this.inputImageG.Channel = "G";
-            this.inputImageG.ChannelVisible = true;
-            this.inputImageG.Invert = false;
-            this.inputImageG.Location = new System.Drawing.Point(252, 5);
-            this.inputImageG.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.inputImageG.Name = "inputImageG";
-            this.inputImageG.Size = new System.Drawing.Size(240, 260);
-            this.inputImageG.TabIndex = 2;
-            this.inputImageG.ImageProcessComplete += new EasyChannelPacking.InputImage.ImageProcessCompleteEventHandler(this.inputImageR_ImageProcessComplete);
-            this.inputImageG.ChannelChanged += new EasyChannelPacking.InputImage.ChannelChangedEventHandler(this.inputImageR_ChannelChanged);
-            // 
-            // inputImageB
-            // 
-            this.inputImageB.AllowDrop = true;
-            this.inputImageB.BackColor = System.Drawing.Color.Blue;
-            this.inputImageB.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("inputImageB.BackgroundImage")));
-            this.inputImageB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.inputImageB.Caption = "Output B";
-            this.inputImageB.Channel = "B";
-            this.inputImageB.ChannelVisible = true;
-            this.inputImageB.Invert = false;
-            this.inputImageB.Location = new System.Drawing.Point(500, 5);
-            this.inputImageB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.inputImageB.Name = "inputImageB";
-            this.inputImageB.Size = new System.Drawing.Size(240, 260);
-            this.inputImageB.TabIndex = 3;
-            this.inputImageB.ImageProcessComplete += new EasyChannelPacking.InputImage.ImageProcessCompleteEventHandler(this.inputImageR_ImageProcessComplete);
-            this.inputImageB.ChannelChanged += new EasyChannelPacking.InputImage.ChannelChangedEventHandler(this.inputImageR_ChannelChanged);
-            // 
-            // inputImageA
-            // 
-            this.inputImageA.AllowDrop = true;
-            this.inputImageA.BackColor = System.Drawing.Color.White;
-            this.inputImageA.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("inputImageA.BackgroundImage")));
-            this.inputImageA.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.inputImageA.Caption = "Output A";
-            this.inputImageA.Channel = "A";
-            this.inputImageA.ChannelVisible = true;
-            this.inputImageA.Invert = false;
-            this.inputImageA.Location = new System.Drawing.Point(748, 5);
-            this.inputImageA.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.inputImageA.Name = "inputImageA";
-            this.inputImageA.Size = new System.Drawing.Size(240, 260);
-            this.inputImageA.TabIndex = 11;
-            this.inputImageA.ImageProcessComplete += new EasyChannelPacking.InputImage.ImageProcessCompleteEventHandler(this.inputImageR_ImageProcessComplete);
-            this.inputImageA.ChannelChanged += new EasyChannelPacking.InputImage.ChannelChangedEventHandler(this.inputImageR_ChannelChanged);
+            this.flowLayoutPanel1.Resize += new System.EventHandler(this.flowLayoutPanel1_Resize);
             // 
             // tabPage2
             // 
@@ -588,18 +521,6 @@
             this.buttonUnpack.UseVisualStyleBackColor = true;
             this.buttonUnpack.Click += new System.EventHandler(this.button6_Click);
             // 
-            // inputImageUnpack
-            // 
-            this.inputImageUnpack.Caption = "InputImage";
-            this.inputImageUnpack.Channel = "";
-            this.inputImageUnpack.ChannelVisible = false;
-            this.inputImageUnpack.Invert = false;
-            this.inputImageUnpack.Location = new System.Drawing.Point(0, 0);
-            this.inputImageUnpack.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.inputImageUnpack.Name = "inputImageUnpack";
-            this.inputImageUnpack.Size = new System.Drawing.Size(315, 339);
-            this.inputImageUnpack.TabIndex = 0;
-            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
@@ -685,6 +606,107 @@
             this.timerProcessa.Interval = 500;
             this.timerProcessa.Tick += new System.EventHandler(this.timerProcessa_Tick);
             // 
+            // inputImageR
+            // 
+            this.inputImageR.AllowDrop = true;
+            this.inputImageR.BackColor = System.Drawing.Color.Red;
+            this.inputImageR.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.inputImageR.Caption = "Output R";
+            this.inputImageR.Channel = "R";
+            this.inputImageR.ChannelVisible = true;
+            this.inputImageR.Invert = false;
+            this.inputImageR.Location = new System.Drawing.Point(4, 5);
+            this.inputImageR.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.inputImageR.Name = "inputImageR";
+            this.inputImageR.Size = new System.Drawing.Size(240, 260);
+            this.inputImageR.TabIndex = 1;
+            this.inputImageR.ImageProcessComplete += new EasyChannelPacking.InputImage.ImageProcessCompleteEventHandler(this.inputImageR_ImageProcessComplete);
+            this.inputImageR.ChannelChanged += new EasyChannelPacking.InputImage.ChannelChangedEventHandler(this.inputImageR_ChannelChanged);
+            // 
+            // inputImageG
+            // 
+            this.inputImageG.AllowDrop = true;
+            this.inputImageG.BackColor = System.Drawing.Color.ForestGreen;
+            this.inputImageG.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("inputImageG.BackgroundImage")));
+            this.inputImageG.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.inputImageG.Caption = "Output G";
+            this.inputImageG.Channel = "G";
+            this.inputImageG.ChannelVisible = true;
+            this.inputImageG.Invert = false;
+            this.inputImageG.Location = new System.Drawing.Point(252, 5);
+            this.inputImageG.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.inputImageG.Name = "inputImageG";
+            this.inputImageG.Size = new System.Drawing.Size(240, 260);
+            this.inputImageG.TabIndex = 2;
+            this.inputImageG.ImageProcessComplete += new EasyChannelPacking.InputImage.ImageProcessCompleteEventHandler(this.inputImageR_ImageProcessComplete);
+            this.inputImageG.ChannelChanged += new EasyChannelPacking.InputImage.ChannelChangedEventHandler(this.inputImageR_ChannelChanged);
+            // 
+            // inputImageB
+            // 
+            this.inputImageB.AllowDrop = true;
+            this.inputImageB.BackColor = System.Drawing.Color.Blue;
+            this.inputImageB.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("inputImageB.BackgroundImage")));
+            this.inputImageB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.inputImageB.Caption = "Output B";
+            this.inputImageB.Channel = "B";
+            this.inputImageB.ChannelVisible = true;
+            this.inputImageB.Invert = false;
+            this.inputImageB.Location = new System.Drawing.Point(500, 5);
+            this.inputImageB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.inputImageB.Name = "inputImageB";
+            this.inputImageB.Size = new System.Drawing.Size(240, 260);
+            this.inputImageB.TabIndex = 3;
+            this.inputImageB.ImageProcessComplete += new EasyChannelPacking.InputImage.ImageProcessCompleteEventHandler(this.inputImageR_ImageProcessComplete);
+            this.inputImageB.ChannelChanged += new EasyChannelPacking.InputImage.ChannelChangedEventHandler(this.inputImageR_ChannelChanged);
+            // 
+            // inputImageA
+            // 
+            this.inputImageA.AllowDrop = true;
+            this.inputImageA.BackColor = System.Drawing.Color.White;
+            this.inputImageA.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("inputImageA.BackgroundImage")));
+            this.inputImageA.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.inputImageA.Caption = "Output A";
+            this.inputImageA.Channel = "A";
+            this.inputImageA.ChannelVisible = true;
+            this.inputImageA.Invert = false;
+            this.inputImageA.Location = new System.Drawing.Point(748, 5);
+            this.inputImageA.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.inputImageA.Name = "inputImageA";
+            this.inputImageA.Size = new System.Drawing.Size(240, 260);
+            this.inputImageA.TabIndex = 11;
+            this.inputImageA.ImageProcessComplete += new EasyChannelPacking.InputImage.ImageProcessCompleteEventHandler(this.inputImageR_ImageProcessComplete);
+            this.inputImageA.ChannelChanged += new EasyChannelPacking.InputImage.ChannelChangedEventHandler(this.inputImageR_ChannelChanged);
+            // 
+            // inputImageUnpack
+            // 
+            this.inputImageUnpack.Caption = "InputImage";
+            this.inputImageUnpack.Channel = "";
+            this.inputImageUnpack.ChannelVisible = false;
+            this.inputImageUnpack.Invert = false;
+            this.inputImageUnpack.Location = new System.Drawing.Point(0, 0);
+            this.inputImageUnpack.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.inputImageUnpack.Name = "inputImageUnpack";
+            this.inputImageUnpack.Size = new System.Drawing.Size(315, 339);
+            this.inputImageUnpack.TabIndex = 0;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(4, 5);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.flowLayoutPanel1);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.outBox);
+            this.splitContainer1.Size = new System.Drawing.Size(1025, 731);
+            this.splitContainer1.SplitterDistance = 270;
+            this.splitContainer1.TabIndex = 50;
+            // 
             // FormEasyChannelPacking
             // 
             this.AllowDrop = true;
@@ -724,6 +746,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -776,6 +802,7 @@
         private System.Windows.Forms.ComboBox comboBoxImageMode;
         private System.Windows.Forms.Timer timerProcessa;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.SplitContainer splitContainer1;
     }
 }
 
