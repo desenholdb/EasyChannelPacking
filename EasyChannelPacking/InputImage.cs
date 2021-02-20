@@ -225,7 +225,8 @@ namespace EasyChannelPacking
 
         private void buttonClear_Click(object sender, EventArgs e)
         {
-            CarregarImagem(null);
+            if (myImage !=null)
+                CarregarImagem(null);
             
         }
 
@@ -251,6 +252,11 @@ namespace EasyChannelPacking
                 CarregarImagem(arquivo);
             }
 
+        }
+
+        private void InputImage_Resize(object sender, EventArgs e)
+        {
+            
         }
     }
 }

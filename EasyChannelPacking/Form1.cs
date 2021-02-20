@@ -57,9 +57,10 @@ namespace EasyChannelPacking
         Bitmap bmpUnpackG;
         Bitmap bmpUnpackB;
         Bitmap bmpUnpackA;
-
+        bool cancelWork = false;
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            cancelWork = false;
             Pack p = (Pack)e.Argument;
 
             Bitmap bmpRef = pack.bmpR ?? pack.bmpG ?? pack.bmpB ?? pack.bmpA;
@@ -89,7 +90,7 @@ namespace EasyChannelPacking
                         progress++;
 
 
-                        if (e.Cancel)
+                        if (e.Cancel || cancelWork)
                             break;
                     }
 
@@ -100,11 +101,11 @@ namespace EasyChannelPacking
                         backgroundWorker1.ReportProgress(percent);
                     }
 
-                    if (e.Cancel)
+                    if (e.Cancel || cancelWork)
                         break;
                 }
 
-                p.Sucess = !e.Cancel;
+                p.Sucess = !(e.Cancel || cancelWork);
 
                 
             }
@@ -343,6 +344,7 @@ namespace EasyChannelPacking
             }
             else
             {
+                cancelWork = true;
                 backgroundWorker1.CancelAsync();
                 timerProcessa.Enabled = false;
                 timerProcessa.Enabled = true;

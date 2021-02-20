@@ -111,6 +111,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bkg_grid.png" />
     <Content Include="icon.ico" />
     <None Include="Resources\delete-sign_16.png" />
   </ItemGroup>
