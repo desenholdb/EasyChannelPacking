@@ -151,10 +151,14 @@ namespace EasyChannelPacking
                         //bmpB.SetPixel(x, y, Color.FromArgb(255, 0, 0, pixel.B));
                         //bmpA.SetPixel(x, y, Color.FromArgb(pixel.A, 0, 0, 0));
 
-                        bmpR.SetPixel(x, y, Color.FromArgb(pixel.R, pixel.R, pixel.R, pixel.R));
-                        bmpG.SetPixel(x, y, Color.FromArgb(pixel.G, pixel.G, pixel.G, pixel.G));
-                        bmpB.SetPixel(x, y, Color.FromArgb(pixel.B, pixel.B, pixel.B, pixel.B));
-                        bmpA.SetPixel(x, y, Color.FromArgb(pixel.A, pixel.A, pixel.A, pixel.A));
+                        if (bmpR != null)
+                            bmpR.SetPixel(x, y, Color.FromArgb(pixel.R, pixel.R, pixel.R, pixel.R));
+                        if (bmpG != null)
+                            bmpG.SetPixel(x, y, Color.FromArgb(pixel.G, pixel.G, pixel.G, pixel.G));
+                        if (bmpB != null)
+                            bmpB.SetPixel(x, y, Color.FromArgb(pixel.B, pixel.B, pixel.B, pixel.B));
+                        if (bmpA != null)
+                            bmpA.SetPixel(x, y, Color.FromArgb(pixel.A, pixel.A, pixel.A, pixel.A));
 
 
                         //bmpR.SetPixel(x, y, Color.FromArgb(255, pixel.R, pixel.R, pixel.R));
