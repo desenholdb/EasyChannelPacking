@@ -34,6 +34,11 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.inputImageR = new EasyChannelPacking.InputImage();
+            this.inputImageG = new EasyChannelPacking.InputImage();
+            this.inputImageB = new EasyChannelPacking.InputImage();
+            this.inputImageA = new EasyChannelPacking.InputImage();
+            this.outBox = new System.Windows.Forms.PictureBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -43,18 +48,27 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.unpackOutA = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.saveA = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.unpackOutB = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.saveB = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.unpackOutG = new System.Windows.Forms.PictureBox();
             this.saveG = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.unpackOutR = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.saveR = new System.Windows.Forms.Button();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.buttonUnpack = new System.Windows.Forms.Button();
+            this.inputImageUnpack = new EasyChannelPacking.InputImage();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
@@ -64,20 +78,6 @@
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.panel1 = new System.Windows.Forms.Panel();
             this.timerProcessa = new System.Windows.Forms.Timer(this.components);
-            this.inputImageR = new EasyChannelPacking.InputImage();
-            this.inputImageUnpack = new EasyChannelPacking.InputImage();
-            this.inputImageG = new EasyChannelPacking.InputImage();
-            this.inputImageB = new EasyChannelPacking.InputImage();
-            this.inputImageA = new EasyChannelPacking.InputImage();
-            this.outBox = new System.Windows.Forms.PictureBox();
-            this.unpackOutA = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.unpackOutB = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.unpackOutG = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.unpackOutR = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -85,22 +85,22 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.outBox)).BeginInit();
             this.panel2.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox9.SuspendLayout();
-            this.groupBox8.SuspendLayout();
-            this.groupBox7.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.outBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.unpackOutA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            this.groupBox8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.unpackOutB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.unpackOutG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.unpackOutR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -120,7 +120,7 @@
             // tabPage1
             // 
             this.tabPage1.AllowDrop = true;
-            this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.tabPage1.Controls.Add(this.splitContainer1);
             this.tabPage1.Controls.Add(this.progressBar1);
             this.tabPage1.Controls.Add(this.panel2);
@@ -163,7 +163,86 @@
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1025, 227);
             this.flowLayoutPanel1.TabIndex = 48;
+            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             this.flowLayoutPanel1.Resize += new System.EventHandler(this.flowLayoutPanel1_Resize);
+            // 
+            // inputImageR
+            // 
+            this.inputImageR.AllowDrop = true;
+            this.inputImageR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.inputImageR.Caption = "Output R";
+            this.inputImageR.Channel = "R";
+            this.inputImageR.ChannelVisible = true;
+            this.inputImageR.Invert = false;
+            this.inputImageR.Location = new System.Drawing.Point(4, 5);
+            this.inputImageR.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.inputImageR.Name = "inputImageR";
+            this.inputImageR.Size = new System.Drawing.Size(230, 217);
+            this.inputImageR.TabIndex = 1;
+            this.inputImageR.ImageProcessComplete += new EasyChannelPacking.InputImage.ImageProcessCompleteEventHandler(this.inputImageR_ImageProcessComplete);
+            this.inputImageR.ChannelChanged += new EasyChannelPacking.InputImage.ChannelChangedEventHandler(this.inputImageR_ChannelChanged);
+            // 
+            // inputImageG
+            // 
+            this.inputImageG.AllowDrop = true;
+            this.inputImageG.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(128)))), ((int)(((byte)(64)))));
+            this.inputImageG.Caption = "Output G";
+            this.inputImageG.Channel = "G";
+            this.inputImageG.ChannelVisible = true;
+            this.inputImageG.Invert = false;
+            this.inputImageG.Location = new System.Drawing.Point(242, 5);
+            this.inputImageG.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.inputImageG.Name = "inputImageG";
+            this.inputImageG.Size = new System.Drawing.Size(230, 217);
+            this.inputImageG.TabIndex = 2;
+            this.inputImageG.ImageProcessComplete += new EasyChannelPacking.InputImage.ImageProcessCompleteEventHandler(this.inputImageR_ImageProcessComplete);
+            this.inputImageG.ChannelChanged += new EasyChannelPacking.InputImage.ChannelChangedEventHandler(this.inputImageR_ChannelChanged);
+            // 
+            // inputImageB
+            // 
+            this.inputImageB.AllowDrop = true;
+            this.inputImageB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(128)))));
+            this.inputImageB.Caption = "Output B";
+            this.inputImageB.Channel = "B";
+            this.inputImageB.ChannelVisible = true;
+            this.inputImageB.Invert = false;
+            this.inputImageB.Location = new System.Drawing.Point(480, 5);
+            this.inputImageB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.inputImageB.Name = "inputImageB";
+            this.inputImageB.Size = new System.Drawing.Size(230, 217);
+            this.inputImageB.TabIndex = 3;
+            this.inputImageB.ImageProcessComplete += new EasyChannelPacking.InputImage.ImageProcessCompleteEventHandler(this.inputImageR_ImageProcessComplete);
+            this.inputImageB.ChannelChanged += new EasyChannelPacking.InputImage.ChannelChangedEventHandler(this.inputImageR_ChannelChanged);
+            // 
+            // inputImageA
+            // 
+            this.inputImageA.AllowDrop = true;
+            this.inputImageA.BackColor = System.Drawing.Color.Gray;
+            this.inputImageA.Caption = "Output A";
+            this.inputImageA.Channel = "A";
+            this.inputImageA.ChannelVisible = true;
+            this.inputImageA.Invert = false;
+            this.inputImageA.Location = new System.Drawing.Point(718, 5);
+            this.inputImageA.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.inputImageA.Name = "inputImageA";
+            this.inputImageA.Size = new System.Drawing.Size(230, 217);
+            this.inputImageA.TabIndex = 11;
+            this.inputImageA.ImageProcessComplete += new EasyChannelPacking.InputImage.ImageProcessCompleteEventHandler(this.inputImageR_ImageProcessComplete);
+            this.inputImageA.ChannelChanged += new EasyChannelPacking.InputImage.ChannelChangedEventHandler(this.inputImageR_ChannelChanged);
+            // 
+            // outBox
+            // 
+            this.outBox.BackColor = System.Drawing.Color.Gray;
+            this.outBox.BackgroundImage = global::EasyChannelPacking.Properties.Resources.bkg_grid;
+            this.outBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.outBox.Image = ((System.Drawing.Image)(resources.GetObject("outBox.Image")));
+            this.outBox.Location = new System.Drawing.Point(0, 0);
+            this.outBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.outBox.Name = "outBox";
+            this.outBox.Size = new System.Drawing.Size(1025, 500);
+            this.outBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.outBox.TabIndex = 16;
+            this.outBox.TabStop = false;
             // 
             // progressBar1
             // 
@@ -287,6 +366,28 @@
             this.label7.Text = "A";
             this.label7.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // unpackOutA
+            // 
+            this.unpackOutA.Image = ((System.Drawing.Image)(resources.GetObject("unpackOutA.Image")));
+            this.unpackOutA.Location = new System.Drawing.Point(14, 69);
+            this.unpackOutA.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.unpackOutA.Name = "unpackOutA";
+            this.unpackOutA.Size = new System.Drawing.Size(225, 242);
+            this.unpackOutA.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.unpackOutA.TabIndex = 29;
+            this.unpackOutA.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
+            this.pictureBox4.Location = new System.Drawing.Point(14, 69);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(225, 242);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 47;
+            this.pictureBox4.TabStop = false;
+            // 
             // saveA
             // 
             this.saveA.Location = new System.Drawing.Point(14, 321);
@@ -326,6 +427,28 @@
             this.label6.TabIndex = 43;
             this.label6.Text = "B";
             this.label6.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // unpackOutB
+            // 
+            this.unpackOutB.Image = ((System.Drawing.Image)(resources.GetObject("unpackOutB.Image")));
+            this.unpackOutB.Location = new System.Drawing.Point(14, 69);
+            this.unpackOutB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.unpackOutB.Name = "unpackOutB";
+            this.unpackOutB.Size = new System.Drawing.Size(225, 242);
+            this.unpackOutB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.unpackOutB.TabIndex = 29;
+            this.unpackOutB.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(14, 69);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(225, 242);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 46;
+            this.pictureBox3.TabStop = false;
             // 
             // saveB
             // 
@@ -367,6 +490,17 @@
             this.label9.Text = "G";
             this.label9.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // unpackOutG
+            // 
+            this.unpackOutG.Image = ((System.Drawing.Image)(resources.GetObject("unpackOutG.Image")));
+            this.unpackOutG.Location = new System.Drawing.Point(14, 69);
+            this.unpackOutG.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.unpackOutG.Name = "unpackOutG";
+            this.unpackOutG.Size = new System.Drawing.Size(225, 242);
+            this.unpackOutG.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.unpackOutG.TabIndex = 29;
+            this.unpackOutG.TabStop = false;
+            // 
             // saveG
             // 
             this.saveG.Location = new System.Drawing.Point(14, 321);
@@ -378,6 +512,17 @@
             this.saveG.UseVisualStyleBackColor = true;
             this.saveG.Visible = false;
             this.saveG.Click += new System.EventHandler(this.saveG_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(14, 69);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(225, 242);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 45;
+            this.pictureBox2.TabStop = false;
             // 
             // groupBox6
             // 
@@ -406,6 +551,28 @@
             this.label5.TabIndex = 43;
             this.label5.Text = "R";
             this.label5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // unpackOutR
+            // 
+            this.unpackOutR.Image = ((System.Drawing.Image)(resources.GetObject("unpackOutR.Image")));
+            this.unpackOutR.Location = new System.Drawing.Point(14, 69);
+            this.unpackOutR.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.unpackOutR.Name = "unpackOutR";
+            this.unpackOutR.Size = new System.Drawing.Size(225, 242);
+            this.unpackOutR.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.unpackOutR.TabIndex = 29;
+            this.unpackOutR.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(14, 69);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(225, 242);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 44;
+            this.pictureBox1.TabStop = false;
             // 
             // saveR
             // 
@@ -437,6 +604,18 @@
             this.buttonUnpack.Text = "Unpack Image";
             this.buttonUnpack.UseVisualStyleBackColor = true;
             this.buttonUnpack.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // inputImageUnpack
+            // 
+            this.inputImageUnpack.Caption = "InputImage";
+            this.inputImageUnpack.Channel = "";
+            this.inputImageUnpack.ChannelVisible = false;
+            this.inputImageUnpack.Invert = false;
+            this.inputImageUnpack.Location = new System.Drawing.Point(0, 0);
+            this.inputImageUnpack.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.inputImageUnpack.Name = "inputImageUnpack";
+            this.inputImageUnpack.Size = new System.Drawing.Size(339, 0);
+            this.inputImageUnpack.TabIndex = 0;
             // 
             // imageList1
             // 
@@ -523,190 +702,12 @@
             this.timerProcessa.Interval = 500;
             this.timerProcessa.Tick += new System.EventHandler(this.timerProcessa_Tick);
             // 
-            // inputImageR
-            // 
-            this.inputImageR.AllowDrop = true;
-            this.inputImageR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(173)))), ((int)(((byte)(174)))));
-            this.inputImageR.Caption = "Output R";
-            this.inputImageR.Channel = "R";
-            this.inputImageR.ChannelVisible = true;
-            this.inputImageR.Invert = false;
-            this.inputImageR.Location = new System.Drawing.Point(4, 5);
-            this.inputImageR.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.inputImageR.Name = "inputImageR";
-            this.inputImageR.Size = new System.Drawing.Size(230, 217);
-            this.inputImageR.TabIndex = 1;
-            this.inputImageR.ImageProcessComplete += new EasyChannelPacking.InputImage.ImageProcessCompleteEventHandler(this.inputImageR_ImageProcessComplete);
-            this.inputImageR.ChannelChanged += new EasyChannelPacking.InputImage.ChannelChangedEventHandler(this.inputImageR_ChannelChanged);
-            // 
-            // inputImageUnpack
-            // 
-            this.inputImageUnpack.Caption = "InputImage";
-            this.inputImageUnpack.Channel = "";
-            this.inputImageUnpack.ChannelVisible = false;
-            this.inputImageUnpack.Invert = false;
-            this.inputImageUnpack.Location = new System.Drawing.Point(0, 0);
-            this.inputImageUnpack.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.inputImageUnpack.Name = "inputImageUnpack";
-            this.inputImageUnpack.Size = new System.Drawing.Size(339, 0);
-            this.inputImageUnpack.TabIndex = 0;
-            // 
-            // inputImageG
-            // 
-            this.inputImageG.AllowDrop = true;
-            this.inputImageG.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(230)))), ((int)(((byte)(170)))));
-            this.inputImageG.Caption = "Output G";
-            this.inputImageG.Channel = "G";
-            this.inputImageG.ChannelVisible = true;
-            this.inputImageG.Invert = false;
-            this.inputImageG.Location = new System.Drawing.Point(242, 5);
-            this.inputImageG.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.inputImageG.Name = "inputImageG";
-            this.inputImageG.Size = new System.Drawing.Size(230, 217);
-            this.inputImageG.TabIndex = 2;
-            this.inputImageG.ImageProcessComplete += new EasyChannelPacking.InputImage.ImageProcessCompleteEventHandler(this.inputImageR_ImageProcessComplete);
-            this.inputImageG.ChannelChanged += new EasyChannelPacking.InputImage.ChannelChangedEventHandler(this.inputImageR_ChannelChanged);
-            // 
-            // inputImageB
-            // 
-            this.inputImageB.AllowDrop = true;
-            this.inputImageB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(193)))), ((int)(((byte)(231)))));
-            this.inputImageB.Caption = "Output B";
-            this.inputImageB.Channel = "B";
-            this.inputImageB.ChannelVisible = true;
-            this.inputImageB.Invert = false;
-            this.inputImageB.Location = new System.Drawing.Point(480, 5);
-            this.inputImageB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.inputImageB.Name = "inputImageB";
-            this.inputImageB.Size = new System.Drawing.Size(230, 217);
-            this.inputImageB.TabIndex = 3;
-            this.inputImageB.ImageProcessComplete += new EasyChannelPacking.InputImage.ImageProcessCompleteEventHandler(this.inputImageR_ImageProcessComplete);
-            this.inputImageB.ChannelChanged += new EasyChannelPacking.InputImage.ChannelChangedEventHandler(this.inputImageR_ChannelChanged);
-            // 
-            // inputImageA
-            // 
-            this.inputImageA.AllowDrop = true;
-            this.inputImageA.BackColor = System.Drawing.Color.White;
-            this.inputImageA.Caption = "Output A";
-            this.inputImageA.Channel = "A";
-            this.inputImageA.ChannelVisible = true;
-            this.inputImageA.Invert = false;
-            this.inputImageA.Location = new System.Drawing.Point(718, 5);
-            this.inputImageA.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.inputImageA.Name = "inputImageA";
-            this.inputImageA.Size = new System.Drawing.Size(230, 217);
-            this.inputImageA.TabIndex = 11;
-            this.inputImageA.ImageProcessComplete += new EasyChannelPacking.InputImage.ImageProcessCompleteEventHandler(this.inputImageR_ImageProcessComplete);
-            this.inputImageA.ChannelChanged += new EasyChannelPacking.InputImage.ChannelChangedEventHandler(this.inputImageR_ChannelChanged);
-            // 
-            // outBox
-            // 
-            this.outBox.BackColor = System.Drawing.Color.Gray;
-            this.outBox.BackgroundImage = global::EasyChannelPacking.Properties.Resources.bkg_grid;
-            this.outBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.outBox.Image = ((System.Drawing.Image)(resources.GetObject("outBox.Image")));
-            this.outBox.Location = new System.Drawing.Point(0, 0);
-            this.outBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.outBox.Name = "outBox";
-            this.outBox.Size = new System.Drawing.Size(1025, 500);
-            this.outBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.outBox.TabIndex = 16;
-            this.outBox.TabStop = false;
-            // 
-            // unpackOutA
-            // 
-            this.unpackOutA.Image = ((System.Drawing.Image)(resources.GetObject("unpackOutA.Image")));
-            this.unpackOutA.Location = new System.Drawing.Point(14, 69);
-            this.unpackOutA.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.unpackOutA.Name = "unpackOutA";
-            this.unpackOutA.Size = new System.Drawing.Size(225, 242);
-            this.unpackOutA.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.unpackOutA.TabIndex = 29;
-            this.unpackOutA.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(14, 69);
-            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(225, 242);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 47;
-            this.pictureBox4.TabStop = false;
-            // 
-            // unpackOutB
-            // 
-            this.unpackOutB.Image = ((System.Drawing.Image)(resources.GetObject("unpackOutB.Image")));
-            this.unpackOutB.Location = new System.Drawing.Point(14, 69);
-            this.unpackOutB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.unpackOutB.Name = "unpackOutB";
-            this.unpackOutB.Size = new System.Drawing.Size(225, 242);
-            this.unpackOutB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.unpackOutB.TabIndex = 29;
-            this.unpackOutB.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(14, 69);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(225, 242);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 46;
-            this.pictureBox3.TabStop = false;
-            // 
-            // unpackOutG
-            // 
-            this.unpackOutG.Image = ((System.Drawing.Image)(resources.GetObject("unpackOutG.Image")));
-            this.unpackOutG.Location = new System.Drawing.Point(14, 69);
-            this.unpackOutG.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.unpackOutG.Name = "unpackOutG";
-            this.unpackOutG.Size = new System.Drawing.Size(225, 242);
-            this.unpackOutG.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.unpackOutG.TabIndex = 29;
-            this.unpackOutG.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(14, 69);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(225, 242);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 45;
-            this.pictureBox2.TabStop = false;
-            // 
-            // unpackOutR
-            // 
-            this.unpackOutR.Image = ((System.Drawing.Image)(resources.GetObject("unpackOutR.Image")));
-            this.unpackOutR.Location = new System.Drawing.Point(14, 69);
-            this.unpackOutR.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.unpackOutR.Name = "unpackOutR";
-            this.unpackOutR.Size = new System.Drawing.Size(225, 242);
-            this.unpackOutR.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.unpackOutR.TabIndex = 29;
-            this.unpackOutR.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(14, 69);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(225, 242);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 44;
-            this.pictureBox1.TabStop = false;
-            // 
             // FormEasyChannelPacking
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Window;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1041, 906);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel1);
@@ -722,28 +723,28 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.outBox)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.outBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.unpackOutA)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.unpackOutB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.unpackOutG)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.unpackOutR)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
