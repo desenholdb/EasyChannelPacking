@@ -92,8 +92,8 @@ namespace EasyChannelPacking
             }
         }
 
-        
 
+        bool cancel = false;
         public void CarregarImagem(string arquivo)
         {
             if (!String.IsNullOrWhiteSpace(arquivo))
@@ -116,6 +116,7 @@ namespace EasyChannelPacking
             if (backgroundWorkerProcessaImagem.IsBusy)
             {
                 backgroundWorkerProcessaImagem.CancelAsync();
+                cancel = true;
             }
             else
             {
@@ -128,7 +129,7 @@ namespace EasyChannelPacking
         private void backgroundWorkerProcessaImagem_DoWork(object sender, DoWorkEventArgs e)
         {
             Bitmap ImgCache = e.Argument as Bitmap;
-            
+            cancel = false;
             if (ImgCache != null)
             {
                 Color pixel;
@@ -166,7 +167,7 @@ namespace EasyChannelPacking
                         //bmpB.SetPixel(x, y, Color.FromArgb(255, pixel.B, pixel.B, pixel.B));
                         //bmpA.SetPixel(x, y, Color.FromArgb(pixel.A, pixel.A, pixel.A, pixel.A));
 
-                        if (e.Cancel)
+                        if (cancel)
                         {
                             break;
                         }
@@ -182,13 +183,13 @@ namespace EasyChannelPacking
                         backgroundWorkerProcessaImagem.ReportProgress((p * 100) / total);
                     }
 
-                    if (e.Cancel)
+                    if (cancel)
                     {
                         break;
                     }
                 }
             }
-            e.Result = !e.Cancel;
+            e.Result = !cancel;
         }
 
         private void backgroundWorkerProcessaImagem_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -203,8 +204,8 @@ namespace EasyChannelPacking
                 }
                 else
                 {
-                    if (myImage != null)
-                        backgroundWorkerProcessaImagem.RunWorkerAsync();
+                    Bitmap bmp = myImage == null ? null : new Bitmap(myImage);
+                    backgroundWorkerProcessaImagem.RunWorkerAsync(bmp);
                 }
             }
             else
