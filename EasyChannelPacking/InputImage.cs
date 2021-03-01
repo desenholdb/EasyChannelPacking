@@ -28,15 +28,17 @@ namespace EasyChannelPacking
         public string Channel { get => comboChannel.Text; set => comboChannel.Text = value; }
         [Editor]
         public bool Invert { get => checkBoxinvert.Checked; set => checkBoxinvert.Checked = value; }
+        public bool CanInvert { get => checkBoxinvert.Visible; set => checkBoxinvert.Visible = value; }
 
         [Editor]
         public bool ChannelVisible { get => comboChannel.Visible; set => comboChannel.Visible = value; }
 
-
+        
         public Bitmap BmpR { get => bmpR; }
         public Bitmap BmpG { get => bmpG; }
         public Bitmap BmpB { get => bmpB; }
         public Bitmap BmpA { get => bmpA; }
+        public bool ForceAlpha100 { get; set; }
 
         public delegate void ImageProcessCompleteEventHandler(Object sender, EventArgs e);
         public event ImageProcessCompleteEventHandler ImageProcessComplete;
@@ -153,13 +155,13 @@ namespace EasyChannelPacking
                         //bmpA.SetPixel(x, y, Color.FromArgb(pixel.A, 0, 0, 0));
 
                         if (bmpR != null)
-                            bmpR.SetPixel(x, y, Color.FromArgb(pixel.R, pixel.R, pixel.R, pixel.R));
+                            bmpR.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.R, pixel.R, pixel.R, pixel.R));
                         if (bmpG != null)
-                            bmpG.SetPixel(x, y, Color.FromArgb(pixel.G, pixel.G, pixel.G, pixel.G));
+                            bmpG.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.G, pixel.G, pixel.G, pixel.G));
                         if (bmpB != null)
-                            bmpB.SetPixel(x, y, Color.FromArgb(pixel.B, pixel.B, pixel.B, pixel.B));
+                            bmpB.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.B, pixel.B, pixel.B, pixel.B));
                         if (bmpA != null)
-                            bmpA.SetPixel(x, y, Color.FromArgb(pixel.A, pixel.A, pixel.A, pixel.A));
+                            bmpA.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.A, pixel.A, pixel.A, pixel.A));
 
 
                         //bmpR.SetPixel(x, y, Color.FromArgb(255, pixel.R, pixel.R, pixel.R));

@@ -212,21 +212,12 @@ namespace EasyChannelPacking
 
         private void backgroundWorker2_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            progressBar2.Value = e.ProgressPercentage;
+            
         }
 
         private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            progressBar2.Value = 0;
-            unpackOutR.Image = bmpUnpackR;
-            unpackOutG.Image = bmpUnpackG;
-            unpackOutB.Image = bmpUnpackB;
-            unpackOutA.Image = bmpUnpackA;
             
-            saveR.Visible = true;
-            saveG.Visible = true;
-            saveB.Visible = true;
-            saveA.Visible = true;
         }
 
         private void saveR_Click(object sender, EventArgs e)
@@ -391,6 +382,14 @@ namespace EasyChannelPacking
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void inputImage_unpack_ImageProcessComplete(object sender, EventArgs e)
+        {
+            viewImageR.Image = inputImageUnpack.BmpR;
+            viewImageG.Image = inputImageUnpack.BmpG;
+            viewImageB.Image = inputImageUnpack.BmpB;
+            viewImageA.Image = inputImageUnpack.BmpA;
         }
     }
 }
