@@ -109,6 +109,7 @@
             this.checkBoxinvert.Text = "Invert";
             this.toolTip1.SetToolTip(this.checkBoxinvert, "Invert ");
             this.checkBoxinvert.UseVisualStyleBackColor = true;
+            this.checkBoxinvert.CheckedChanged += new System.EventHandler(this.checkBoxinvert_CheckedChanged);
             // 
             // comboChannel
             // 

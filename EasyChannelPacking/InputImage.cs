@@ -152,14 +152,29 @@ namespace EasyChannelPacking
                         //bmpB.SetPixel(x, y, Color.FromArgb(255, 0, 0, pixel.B));
                         //bmpA.SetPixel(x, y, Color.FromArgb(pixel.A, 0, 0, 0));
 
-                        if (bmpR != null)
-                            bmpR.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.R, pixel.R, pixel.R, pixel.R));
-                        if (bmpG != null)
-                            bmpG.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.G, pixel.G, pixel.G, pixel.G));
-                        if (bmpB != null)
-                            bmpB.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.B, pixel.B, pixel.B, pixel.B));
-                        if (bmpA != null)
-                            bmpA.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.A, pixel.A, pixel.A, pixel.A));
+                        if(Invert) //IF it should invert color
+                        {
+                            if (bmpR != null)
+                                bmpR.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : 255-pixel.R, 255 - pixel.R, 255 - pixel.R, 255 - pixel.R));
+                            if (bmpG != null)
+                                bmpG.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : 255 - pixel.G, 255 - pixel.G, 255 - pixel.G, 255 - pixel.G));
+                            if (bmpB != null)
+                                bmpB.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : 255 - pixel.B, 255 - pixel.B, 255 - pixel.B, 255 - pixel.B));
+                            if (bmpA != null)
+                                bmpA.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : 255 - pixel.A, 255 - pixel.A, 255 - pixel.A, 255 - pixel.A));
+                        }
+                        else
+                        {
+                            if (bmpR != null)
+                                bmpR.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.R, pixel.R, pixel.R, pixel.R));
+                            if (bmpG != null)
+                                bmpG.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.G, pixel.G, pixel.G, pixel.G));
+                            if (bmpB != null)
+                                bmpB.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.B, pixel.B, pixel.B, pixel.B));
+                            if (bmpA != null)
+                                bmpA.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.A, pixel.A, pixel.A, pixel.A));
+                        }
+                        
 
 
                         //bmpR.SetPixel(x, y, Color.FromArgb(255, pixel.R, pixel.R, pixel.R));
@@ -262,6 +277,22 @@ namespace EasyChannelPacking
         private void InputImage_Resize(object sender, EventArgs e)
         {
             
+        }
+
+        private void checkBoxinvert_CheckedChanged(object sender, EventArgs e)
+        {
+
+            //Update image processing
+            if (backgroundWorkerProcessaImagem.IsBusy)
+            {
+                backgroundWorkerProcessaImagem.CancelAsync();
+                cancel = true;
+            }
+            else
+            {
+                Bitmap bmp = myImage == null ? null : new Bitmap(myImage);
+                backgroundWorkerProcessaImagem.RunWorkerAsync(bmp);
+            }
         }
     }
 }
