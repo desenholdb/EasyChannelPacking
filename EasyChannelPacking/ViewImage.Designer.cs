@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.buttonSave = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -49,15 +49,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ViewImage";
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.buttonSave);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(3, 119);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(144, 28);
-            this.panel1.TabIndex = 0;
-            // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.AppWorkspace;
@@ -66,10 +57,19 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(3, 16);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(144, 103);
+            this.pictureBox1.Size = new System.Drawing.Size(144, 109);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.buttonSave);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(3, 125);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(144, 22);
+            this.panel1.TabIndex = 0;
             // 
             // buttonSave
             // 
@@ -79,7 +79,7 @@
             this.buttonSave.Image = global::EasyChannelPacking.Properties.Resources.save_16;
             this.buttonSave.Location = new System.Drawing.Point(122, 0);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(22, 28);
+            this.buttonSave.Size = new System.Drawing.Size(22, 22);
             this.buttonSave.TabIndex = 29;
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
@@ -91,8 +91,8 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "ViewImage";
             this.groupBox1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

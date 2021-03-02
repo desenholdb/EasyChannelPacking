@@ -30,9 +30,7 @@ namespace EasyChannelPacking
         public bool Invert { get => checkBoxinvert.Checked; set => checkBoxinvert.Checked = value; }
         public bool CanInvert { get => checkBoxinvert.Visible; set => checkBoxinvert.Visible = value; }
 
-        [Editor]
         public bool ChannelVisible { get => comboChannel.Visible; set => comboChannel.Visible = value; }
-
         
         public Bitmap BmpR { get => bmpR; }
         public Bitmap BmpG { get => bmpG; }

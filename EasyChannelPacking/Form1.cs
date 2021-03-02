@@ -30,6 +30,15 @@ namespace EasyChannelPacking
         public FormEasyChannelPacking()
         {
             InitializeComponent();
+            inputImageA.ChannelVisible = true;
+            inputImageR.ChannelVisible = true;
+            inputImageG.ChannelVisible = true;
+            inputImageB.ChannelVisible = true;
+            inputImageA.CanInvert = true;
+            inputImageR.CanInvert = true;
+            inputImageG.CanInvert = true;
+            inputImageB.CanInvert = true;
+
         }
 
         private void button1_Click(object sender, EventArgs e)
