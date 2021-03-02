@@ -395,10 +395,14 @@ namespace EasyChannelPacking
 
         private void inputImage_unpack_ImageProcessComplete(object sender, EventArgs e)
         {
-            viewImageR.Image = inputImageUnpack.BmpR;
-            viewImageG.Image = inputImageUnpack.BmpG;
-            viewImageB.Image = inputImageUnpack.BmpB;
-            viewImageA.Image = inputImageUnpack.BmpA;
+            if (viewImageR != null)
+            viewImageR.Image = inputImageUnpack?.BmpR;
+            if (viewImageG != null)
+            viewImageG.Image = inputImageUnpack?.BmpG;
+            if (viewImageB != null)
+            viewImageB.Image = inputImageUnpack?.BmpB;
+            if (viewImageA != null)
+            viewImageA.Image = inputImageUnpack?.BmpA;
         }
     }
 }
