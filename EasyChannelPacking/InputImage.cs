@@ -45,6 +45,15 @@ namespace EasyChannelPacking
         public delegate void ChannelChangedEventHandler(Object sender, EventArgs e);
         public event ChannelChangedEventHandler ChannelChanged;
 
+        public struct TImageProcess
+        {
+            public int Part;
+            public Bitmap Source;
+            public Bitmap BmpR;
+            public Bitmap BmpG;
+            public Bitmap BmpB;
+            public Bitmap BmpA;
+        }
 
 
         public Bitmap GetImage
@@ -129,80 +138,224 @@ namespace EasyChannelPacking
         private void backgroundWorkerProcessaImagem_DoWork(object sender, DoWorkEventArgs e)
         {
             Bitmap ImgCache = e.Argument as Bitmap;
-            cancel = false;
-            if (ImgCache != null)
+            bool parallel = true;
+            if (parallel)
             {
-                Color pixel;
+                DateTime start = DateTime.Now;
+                List<TImageProcess> arrayBmp = new List<TImageProcess>(2);
+                List<TImageProcess> arrayResultBmp = new List<TImageProcess>(2);
+                int nw = ImgCache.Width / 2;
+                int dif = ImgCache.Width - (nw * 2);
+                Bitmap p1 =  new Bitmap(nw, ImgCache.Height);
+                Bitmap p2 = new Bitmap(nw + dif, ImgCache.Height);
+                
+                arrayBmp.Add(new TImageProcess() {Source = p1, Part = 1 });
+                arrayBmp.Add(new TImageProcess() { Source = p2, Part =2 });
+
+                using (Graphics g = Graphics.FromImage(arrayBmp[0].Source))
+                {
+                    g.DrawImage(ImgCache, new Rectangle() { Height = ImgCache.Height, Width = arrayBmp[0].Source.Width, X = 0, Y = 0 }, new Rectangle() { Height = ImgCache.Height, Width = nw, X = 0, Y = 0 }, GraphicsUnit.Pixel);
+                }
+                using (Graphics g = Graphics.FromImage(arrayBmp[1].Source))
+                {
+                    g.DrawImage(ImgCache, new Rectangle() { Height = ImgCache.Height, Width = arrayBmp[1].Source.Width, X = 0, Y = 0 }, new Rectangle() { Height = ImgCache.Height, Width = nw+dif, X = arrayBmp[0].Source.Width + dif, Y = 0 }, GraphicsUnit.Pixel);
+                }
+
+                Parallel.ForEach(arrayBmp, img =>
+                {
+
+                    if (img.Source != null)
+                    {
+                        Color pixel;
+
+                        img.BmpR = new Bitmap(img.Source.Width, img.Source.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                        img.BmpG = new Bitmap(img.BmpR);
+                        img.BmpB = new Bitmap(img.BmpR);
+                        img.BmpA = new Bitmap(img.BmpR);
+                        int total = img.Source.Width * img.Source.Height;
+                        bool report = true;
+                        int p = 0;
+                        for (int x = 0; x < img.Source.Width; x++)
+                        {
+                            for (int y = 0; y < img.Source.Height; y++)
+                            {
+                                pixel = img.Source.GetPixel(x, y);
+
+                                //bmpR.SetPixel(x, y, Color.FromArgb(255, pixel.R, 0, 0));
+                                //bmpG.SetPixel(x, y, Color.FromArgb(255, 0, pixel.G, 0));
+                                //bmpB.SetPixel(x, y, Color.FromArgb(255, 0, 0, pixel.B));
+                                //bmpA.SetPixel(x, y, Color.FromArgb(pixel.A, 0, 0, 0));
+
+                                if (Invert) //IF it should invert color
+                                {
+                                    if (img.BmpR != null)
+                                        img.BmpR.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : 255 - pixel.R, 255 - pixel.R, 255 - pixel.R, 255 - pixel.R));
+                                    if (img.BmpG != null)
+                                        img.BmpG.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : 255 - pixel.G, 255 - pixel.G, 255 - pixel.G, 255 - pixel.G));
+                                    if (img.BmpB != null)
+                                        img.BmpB.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : 255 - pixel.B, 255 - pixel.B, 255 - pixel.B, 255 - pixel.B));
+                                    if (img.BmpA != null)
+                                        img.BmpA.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : 255 - pixel.A, 255 - pixel.A, 255 - pixel.A, 255 - pixel.A));
+                                }
+                                else
+                                {
+                                    if (img.BmpR != null)
+                                        img.BmpR.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.R, pixel.R, pixel.R, pixel.R));
+                                    if (img.BmpG != null)
+                                        img.BmpG.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.G, pixel.G, pixel.G, pixel.G));
+                                    if (img.BmpB != null)
+                                        img.BmpB.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.B, pixel.B, pixel.B, pixel.B));
+                                    if (img.BmpA != null)
+                                        img.BmpA.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.A, pixel.A, pixel.A, pixel.A));
+                                }
+
+
+
+                                //bmpR.SetPixel(x, y, Color.FromArgb(255, pixel.R, pixel.R, pixel.R));
+                                //bmpG.SetPixel(x, y, Color.FromArgb(255, pixel.G, pixel.G, pixel.G));
+                                //bmpB.SetPixel(x, y, Color.FromArgb(255, pixel.B, pixel.B, pixel.B));
+                                //bmpA.SetPixel(x, y, Color.FromArgb(pixel.A, pixel.A, pixel.A, pixel.A));
+
+                                if (cancel)
+                                {
+                                    break;
+                                }
+
+                                p++;
+
+                            }
+
+                            report = !report;
+
+                            if (report)
+                            {
+                                backgroundWorkerProcessaImagem.ReportProgress((p * 100) / total);
+                            }
+
+                            if (cancel)
+                            {
+                                break;
+                            }
+                        }
+                    }
+
+
+                    arrayResultBmp.Add(img);
+                });
+
 
                 bmpR = new Bitmap(ImgCache.Width, ImgCache.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
                 bmpG = new Bitmap(bmpR);
                 bmpB = new Bitmap(bmpR);
                 bmpA = new Bitmap(bmpR);
-                int total = ImgCache.Width * ImgCache.Height;
-                bool report = true;
-                int p = 0;
-                for (int x = 0; x < ImgCache.Width; x++)
+
+
+                using (Graphics g = Graphics.FromImage(bmpR))
                 {
-                    for (int y = 0; y < ImgCache.Height; y++)
+                    g.DrawImage(arrayResultBmp.Where(x=>x.Part==1).FirstOrDefault().BmpR, 0, 0);
+                    g.DrawImage(arrayResultBmp.Where(x => x.Part == 2).FirstOrDefault().BmpR, arrayBmp[0].Source.Width , 0);
+                }
+                using (Graphics g = Graphics.FromImage(bmpG))
+                {
+                    g.DrawImage(arrayResultBmp.Where(x=>x.Part==1).FirstOrDefault().BmpG, 0, 0);
+                    g.DrawImage(arrayResultBmp.Where(x => x.Part == 2).FirstOrDefault().BmpG, arrayBmp[0].Source.Width , 0);
+                }
+                using (Graphics g = Graphics.FromImage(bmpB))
+                {
+                    g.DrawImage(arrayResultBmp.Where(x=>x.Part==1).FirstOrDefault().BmpB, 0, 0);
+                    g.DrawImage(arrayResultBmp.Where(x => x.Part == 2).FirstOrDefault().BmpB, arrayBmp[0].Source.Width , 0);
+                }
+                using (Graphics g = Graphics.FromImage(bmpA))
+                {
+                    g.DrawImage(arrayResultBmp.Where(x=>x.Part==1).FirstOrDefault().BmpA, 0, 0);
+                    g.DrawImage(arrayResultBmp.Where(x => x.Part == 2).FirstOrDefault().BmpA, arrayBmp[0].Source.Width , 0);
+                }
+
+                TimeSpan dur = DateTime.Now - start;
+
+                string pause = ";";
+
+            }
+            else
+            {
+                cancel = false;
+                DateTime start = DateTime.Now;
+                if (ImgCache != null)
+                {
+                    Color pixel;
+
+                    bmpR = new Bitmap(ImgCache.Width, ImgCache.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                    bmpG = new Bitmap(bmpR);
+                    bmpB = new Bitmap(bmpR);
+                    bmpA = new Bitmap(bmpR);
+                    int total = ImgCache.Width * ImgCache.Height;
+                    bool report = true;
+                    int p = 0;
+                    for (int x = 0; x < ImgCache.Width; x++)
                     {
-                        pixel = ImgCache.GetPixel(x, y);
-
-                        //bmpR.SetPixel(x, y, Color.FromArgb(255, pixel.R, 0, 0));
-                        //bmpG.SetPixel(x, y, Color.FromArgb(255, 0, pixel.G, 0));
-                        //bmpB.SetPixel(x, y, Color.FromArgb(255, 0, 0, pixel.B));
-                        //bmpA.SetPixel(x, y, Color.FromArgb(pixel.A, 0, 0, 0));
-
-                        if(Invert) //IF it should invert color
+                        for (int y = 0; y < ImgCache.Height; y++)
                         {
-                            if (bmpR != null)
-                                bmpR.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : 255-pixel.R, 255 - pixel.R, 255 - pixel.R, 255 - pixel.R));
-                            if (bmpG != null)
-                                bmpG.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : 255 - pixel.G, 255 - pixel.G, 255 - pixel.G, 255 - pixel.G));
-                            if (bmpB != null)
-                                bmpB.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : 255 - pixel.B, 255 - pixel.B, 255 - pixel.B, 255 - pixel.B));
-                            if (bmpA != null)
-                                bmpA.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : 255 - pixel.A, 255 - pixel.A, 255 - pixel.A, 255 - pixel.A));
+                            pixel = ImgCache.GetPixel(x, y);
+
+                            //bmpR.SetPixel(x, y, Color.FromArgb(255, pixel.R, 0, 0));
+                            //bmpG.SetPixel(x, y, Color.FromArgb(255, 0, pixel.G, 0));
+                            //bmpB.SetPixel(x, y, Color.FromArgb(255, 0, 0, pixel.B));
+                            //bmpA.SetPixel(x, y, Color.FromArgb(pixel.A, 0, 0, 0));
+
+                            if (Invert) //IF it should invert color
+                            {
+                                if (bmpR != null)
+                                    bmpR.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : 255 - pixel.R, 255 - pixel.R, 255 - pixel.R, 255 - pixel.R));
+                                if (bmpG != null)
+                                    bmpG.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : 255 - pixel.G, 255 - pixel.G, 255 - pixel.G, 255 - pixel.G));
+                                if (bmpB != null)
+                                    bmpB.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : 255 - pixel.B, 255 - pixel.B, 255 - pixel.B, 255 - pixel.B));
+                                if (bmpA != null)
+                                    bmpA.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : 255 - pixel.A, 255 - pixel.A, 255 - pixel.A, 255 - pixel.A));
+                            }
+                            else
+                            {
+                                if (bmpR != null)
+                                    bmpR.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.R, pixel.R, pixel.R, pixel.R));
+                                if (bmpG != null)
+                                    bmpG.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.G, pixel.G, pixel.G, pixel.G));
+                                if (bmpB != null)
+                                    bmpB.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.B, pixel.B, pixel.B, pixel.B));
+                                if (bmpA != null)
+                                    bmpA.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.A, pixel.A, pixel.A, pixel.A));
+                            }
+
+
+
+                            //bmpR.SetPixel(x, y, Color.FromArgb(255, pixel.R, pixel.R, pixel.R));
+                            //bmpG.SetPixel(x, y, Color.FromArgb(255, pixel.G, pixel.G, pixel.G));
+                            //bmpB.SetPixel(x, y, Color.FromArgb(255, pixel.B, pixel.B, pixel.B));
+                            //bmpA.SetPixel(x, y, Color.FromArgb(pixel.A, pixel.A, pixel.A, pixel.A));
+
+                            if (cancel)
+                            {
+                                break;
+                            }
+
+                            p++;
+
                         }
-                        else
+
+                        report = !report;
+
+                        if (report)
                         {
-                            if (bmpR != null)
-                                bmpR.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.R, pixel.R, pixel.R, pixel.R));
-                            if (bmpG != null)
-                                bmpG.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.G, pixel.G, pixel.G, pixel.G));
-                            if (bmpB != null)
-                                bmpB.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.B, pixel.B, pixel.B, pixel.B));
-                            if (bmpA != null)
-                                bmpA.SetPixel(x, y, Color.FromArgb(this.ForceAlpha100 ? 255 : pixel.A, pixel.A, pixel.A, pixel.A));
+                            backgroundWorkerProcessaImagem.ReportProgress((p * 100) / total);
                         }
-                        
-
-
-                        //bmpR.SetPixel(x, y, Color.FromArgb(255, pixel.R, pixel.R, pixel.R));
-                        //bmpG.SetPixel(x, y, Color.FromArgb(255, pixel.G, pixel.G, pixel.G));
-                        //bmpB.SetPixel(x, y, Color.FromArgb(255, pixel.B, pixel.B, pixel.B));
-                        //bmpA.SetPixel(x, y, Color.FromArgb(pixel.A, pixel.A, pixel.A, pixel.A));
 
                         if (cancel)
                         {
                             break;
                         }
-
-                        p++;
-                       
-                    }
-
-                    report = !report;
-
-                    if (report)
-                    {
-                        backgroundWorkerProcessaImagem.ReportProgress((p * 100) / total);
-                    }
-
-                    if (cancel)
-                    {
-                        break;
                     }
                 }
+                TimeSpan dur = DateTime.Now - start;
+                string pause = ";";
             }
             e.Result = !cancel;
         }

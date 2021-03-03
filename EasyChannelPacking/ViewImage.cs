@@ -32,6 +32,7 @@ namespace EasyChannelPacking
                     diag.RestoreDirectory = true;
                     diag.Title = "Select save location";
                     diag.FileName = this.ImageDescription?.ToString() ?? "Image" + "_Extracted.png";
+                    diag.Filter = "Png file|*.png";
                     if (diag.ShowDialog() == DialogResult.OK)
                     {
                         pictureBox1.Image.Save(diag.FileName, ImageFormat.Png);
