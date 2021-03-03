@@ -142,6 +142,16 @@ namespace EasyChannelPacking
             if (parallel)
             {
                 DateTime start = DateTime.Now;
+
+                int parts = 4;
+
+                int newWidth = ImgCache.Width / parts;
+                int sobra = ImgCache.Width - (newWidth * parts);
+                for (int p = 0; p < parts; p++)
+                {
+                    
+                }
+
                 List<TImageProcess> arrayBmp = new List<TImageProcess>(2);
                 List<TImageProcess> arrayResultBmp = new List<TImageProcess>(2);
                 int nw = ImgCache.Width / 2;
