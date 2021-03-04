@@ -32,6 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEasyChannelPacking));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.outBox = new System.Windows.Forms.PictureBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,8 +42,6 @@
             this.SaveButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
@@ -49,34 +50,33 @@
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.panel1 = new System.Windows.Forms.Panel();
             this.timerProcessa = new System.Windows.Forms.Timer(this.components);
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.outBox = new System.Windows.Forms.PictureBox();
             this.inputImageR = new EasyChannelPacking.InputImage();
             this.inputImageG = new EasyChannelPacking.InputImage();
             this.inputImageB = new EasyChannelPacking.InputImage();
             this.inputImageA = new EasyChannelPacking.InputImage();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.inputImageUnpack = new EasyChannelPacking.InputImage();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.viewImageR = new EasyChannelPacking.ViewImage();
             this.viewImageG = new EasyChannelPacking.ViewImage();
             this.viewImageB = new EasyChannelPacking.ViewImage();
             this.viewImageA = new EasyChannelPacking.ViewImage();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.outBox)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -87,7 +87,7 @@
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.ImageList = this.imageList1;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1041, 869);
@@ -102,20 +102,68 @@
             this.tabPage1.Controls.Add(this.panel2);
             this.tabPage1.ImageKey = "collect_24.png";
             this.tabPage1.Location = new System.Drawing.Point(4, 31);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage1.Size = new System.Drawing.Size(1033, 834);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Pack";
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.BackColor = System.Drawing.Color.Gray;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(2, 2);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.flowLayoutPanel1);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.outBox);
+            this.splitContainer1.Size = new System.Drawing.Size(1029, 737);
+            this.splitContainer1.SplitterDistance = 228;
+            this.splitContainer1.TabIndex = 50;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.inputImageR);
+            this.flowLayoutPanel1.Controls.Add(this.inputImageG);
+            this.flowLayoutPanel1.Controls.Add(this.inputImageB);
+            this.flowLayoutPanel1.Controls.Add(this.inputImageA);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1029, 228);
+            this.flowLayoutPanel1.TabIndex = 48;
+            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
+            this.flowLayoutPanel1.Resize += new System.EventHandler(this.flowLayoutPanel1_Resize);
+            // 
+            // outBox
+            // 
+            this.outBox.BackColor = System.Drawing.Color.Gray;
+            this.outBox.BackgroundImage = global::EasyChannelPacking.Properties.Resources.bkg_grid;
+            this.outBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.outBox.Image = ((System.Drawing.Image)(resources.GetObject("outBox.Image")));
+            this.outBox.Location = new System.Drawing.Point(0, 0);
+            this.outBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.outBox.Name = "outBox";
+            this.outBox.Size = new System.Drawing.Size(1029, 505);
+            this.outBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.outBox.TabIndex = 16;
+            this.outBox.TabStop = false;
+            // 
             // progressBar1
             // 
             this.progressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.progressBar1.Location = new System.Drawing.Point(4, 736);
+            this.progressBar1.Location = new System.Drawing.Point(2, 739);
             this.progressBar1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(1025, 10);
+            this.progressBar1.Size = new System.Drawing.Size(1029, 10);
             this.progressBar1.TabIndex = 22;
             // 
             // panel2
@@ -125,15 +173,16 @@
             this.panel2.Controls.Add(this.SaveButton);
             this.panel2.Controls.Add(this.button1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(4, 746);
+            this.panel2.Location = new System.Drawing.Point(2, 749);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1025, 83);
+            this.panel2.Size = new System.Drawing.Size(1029, 83);
             this.panel2.TabIndex = 49;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 5);
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(8, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(97, 21);
             this.label1.TabIndex = 15;
@@ -142,14 +191,14 @@
             // comboBoxImageMode
             // 
             this.comboBoxImageMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxImageMode.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.comboBoxImageMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxImageMode.FormattingEnabled = true;
             this.comboBoxImageMode.Items.AddRange(new object[] {
             "Normal",
             "Stretch Image",
             "Center",
             "Zoom"});
-            this.comboBoxImageMode.Location = new System.Drawing.Point(6, 29);
+            this.comboBoxImageMode.Location = new System.Drawing.Point(8, 31);
             this.comboBoxImageMode.Name = "comboBoxImageMode";
             this.comboBoxImageMode.Size = new System.Drawing.Size(213, 29);
             this.comboBoxImageMode.TabIndex = 14;
@@ -158,31 +207,33 @@
             // SaveButton
             // 
             this.SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SaveButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.SaveButton.BackColor = System.Drawing.Color.Gray;
+            this.SaveButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.SaveButton.FlatAppearance.BorderSize = 2;
-            this.SaveButton.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.SaveButton.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.SaveButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DimGray;
+            this.SaveButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.SaveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SaveButton.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.SaveButton.Location = new System.Drawing.Point(803, 17);
+            this.SaveButton.ForeColor = System.Drawing.Color.White;
+            this.SaveButton.Location = new System.Drawing.Point(808, 10);
             this.SaveButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(217, 55);
+            this.SaveButton.Size = new System.Drawing.Size(217, 50);
             this.SaveButton.TabIndex = 13;
             this.SaveButton.Text = "Save";
-            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.UseVisualStyleBackColor = false;
             this.SaveButton.Visible = false;
             this.SaveButton.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(346, 23);
+            this.button1.Location = new System.Drawing.Point(581, 23);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(155, 42);
             this.button1.TabIndex = 12;
             this.button1.Text = "Pack Images";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tabPage2
@@ -191,45 +242,12 @@
             this.tabPage2.BackColor = System.Drawing.Color.DimGray;
             this.tabPage2.Controls.Add(this.splitContainer2);
             this.tabPage2.Location = new System.Drawing.Point(4, 31);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage2.Size = new System.Drawing.Size(1033, 834);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Unpack";
-            // 
-            // splitContainer2
-            // 
-            this.splitContainer2.AllowDrop = true;
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(4, 5);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.AllowDrop = true;
-            this.splitContainer2.Panel1.Controls.Add(this.inputImageUnpack);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.Controls.Add(this.flowLayoutPanel2);
-            this.splitContainer2.Size = new System.Drawing.Size(1025, 824);
-            this.splitContainer2.SplitterDistance = 551;
-            this.splitContainer2.TabIndex = 49;
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.AllowDrop = true;
-            this.flowLayoutPanel2.Controls.Add(this.viewImageR);
-            this.flowLayoutPanel2.Controls.Add(this.viewImageG);
-            this.flowLayoutPanel2.Controls.Add(this.viewImageB);
-            this.flowLayoutPanel2.Controls.Add(this.viewImageA);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(1025, 269);
-            this.flowLayoutPanel2.TabIndex = 47;
             // 
             // imageList1
             // 
@@ -241,7 +259,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.LinkColor = System.Drawing.Color.CornflowerBlue;
+            this.linkLabel1.LinkColor = System.Drawing.Color.LightGray;
             this.linkLabel1.Location = new System.Drawing.Point(35, 7);
             this.linkLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabel1.Name = "linkLabel1";
@@ -254,7 +272,7 @@
             // linkLabel3
             // 
             this.linkLabel3.AutoSize = true;
-            this.linkLabel3.LinkColor = System.Drawing.Color.CornflowerBlue;
+            this.linkLabel3.LinkColor = System.Drawing.Color.LightGray;
             this.linkLabel3.Location = new System.Drawing.Point(150, 7);
             this.linkLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabel3.Name = "linkLabel3";
@@ -267,6 +285,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.Color.Silver;
             this.label10.Location = new System.Drawing.Point(10, 7);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
@@ -304,54 +323,6 @@
             // 
             this.timerProcessa.Interval = 500;
             this.timerProcessa.Tick += new System.EventHandler(this.timerProcessa_Tick);
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.BackColor = System.Drawing.Color.Gray;
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(4, 5);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.flowLayoutPanel1);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.outBox);
-            this.splitContainer1.Size = new System.Drawing.Size(1025, 731);
-            this.splitContainer1.SplitterDistance = 227;
-            this.splitContainer1.TabIndex = 50;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.inputImageR);
-            this.flowLayoutPanel1.Controls.Add(this.inputImageG);
-            this.flowLayoutPanel1.Controls.Add(this.inputImageB);
-            this.flowLayoutPanel1.Controls.Add(this.inputImageA);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1025, 227);
-            this.flowLayoutPanel1.TabIndex = 48;
-            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
-            this.flowLayoutPanel1.Resize += new System.EventHandler(this.flowLayoutPanel1_Resize);
-            // 
-            // outBox
-            // 
-            this.outBox.BackColor = System.Drawing.Color.Gray;
-            this.outBox.BackgroundImage = global::EasyChannelPacking.Properties.Resources.bkg_grid;
-            this.outBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.outBox.Image = ((System.Drawing.Image)(resources.GetObject("outBox.Image")));
-            this.outBox.Location = new System.Drawing.Point(0, 0);
-            this.outBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.outBox.Name = "outBox";
-            this.outBox.Size = new System.Drawing.Size(1025, 500);
-            this.outBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.outBox.TabIndex = 16;
-            this.outBox.TabStop = false;
             // 
             // inputImageR
             // 
@@ -425,6 +396,26 @@
             this.inputImageA.ImageProcessComplete += new EasyChannelPacking.InputImage.ImageProcessCompleteEventHandler(this.inputImageR_ImageProcessComplete);
             this.inputImageA.ChannelChanged += new EasyChannelPacking.InputImage.ChannelChangedEventHandler(this.inputImageR_ChannelChanged);
             // 
+            // splitContainer2
+            // 
+            this.splitContainer2.AllowDrop = true;
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(2, 2);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.AllowDrop = true;
+            this.splitContainer2.Panel1.Controls.Add(this.inputImageUnpack);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.flowLayoutPanel2);
+            this.splitContainer2.Size = new System.Drawing.Size(1029, 830);
+            this.splitContainer2.SplitterDistance = 554;
+            this.splitContainer2.TabIndex = 49;
+            // 
             // inputImageUnpack
             // 
             this.inputImageUnpack.AllowDrop = true;
@@ -438,9 +429,22 @@
             this.inputImageUnpack.Invert = false;
             this.inputImageUnpack.Location = new System.Drawing.Point(0, 0);
             this.inputImageUnpack.Name = "inputImageUnpack";
-            this.inputImageUnpack.Size = new System.Drawing.Size(1025, 551);
+            this.inputImageUnpack.Size = new System.Drawing.Size(1029, 554);
             this.inputImageUnpack.TabIndex = 48;
             this.inputImageUnpack.ImageProcessComplete += new EasyChannelPacking.InputImage.ImageProcessCompleteEventHandler(this.inputImage_unpack_ImageProcessComplete);
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.AllowDrop = true;
+            this.flowLayoutPanel2.Controls.Add(this.viewImageR);
+            this.flowLayoutPanel2.Controls.Add(this.viewImageG);
+            this.flowLayoutPanel2.Controls.Add(this.viewImageB);
+            this.flowLayoutPanel2.Controls.Add(this.viewImageA);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(1029, 272);
+            this.flowLayoutPanel2.TabIndex = 47;
             // 
             // viewImageR
             // 
@@ -504,24 +508,25 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FormEasyChannelPacking";
             this.Text = "Easy Channel Packing";
+            this.Load += new System.EventHandler(this.FormEasyChannelPacking_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.outBox)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

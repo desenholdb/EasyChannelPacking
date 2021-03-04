@@ -15,6 +15,9 @@ namespace EasyChannelPacking
 {
     public partial class FormEasyChannelPacking : Form
     {
+
+        string WindowText = "Easy Channel Packing";
+
         struct Pack
         {
            public Bitmap bmpR;
@@ -30,6 +33,8 @@ namespace EasyChannelPacking
         public FormEasyChannelPacking()
         {
             InitializeComponent();
+            comboBoxImageMode.SelectedIndex = 3;
+
             inputImageA.ChannelVisible = true;
             inputImageR.ChannelVisible = true;
             inputImageG.ChannelVisible = true;
@@ -39,6 +44,11 @@ namespace EasyChannelPacking
             inputImageG.CanInvert = true;
             inputImageB.CanInvert = true;
 
+        }
+
+        private void FormEasyChannelPacking_Load(object sender, EventArgs e)
+        {
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -79,7 +89,7 @@ namespace EasyChannelPacking
                 int progress = 0;
                 int totalprogress = bmpRef.Width * bmpRef.Height;
                 int percent;
-                bool report = true;
+                int report = 0;
                 Color rX;
                 Color gX;
                 Color bX;
@@ -89,10 +99,10 @@ namespace EasyChannelPacking
                 {
                     for (int j = 0; j < bmpRef.Height; j++)
                     {
-                        rX = p.bmpR != null && p.bmpR.Width > i && p.bmpR.Height > j ? p.bmpR?.GetPixel(i, j) ?? Color.FromArgb(255, 0, 0, 0) : Color.FromArgb(255, 0, 0, 0);
-                        gX = p.bmpG != null && p.bmpG.Width > i && p.bmpG.Height > j ? p.bmpG?.GetPixel(i, j) ?? Color.FromArgb(255, 0, 0, 0) : Color.FromArgb(255, 0, 0, 0);
-                        bX = p.bmpB != null && p.bmpB.Width > i && p.bmpB.Height > j ? p.bmpB?.GetPixel(i, j) ?? Color.FromArgb(255, 0, 0, 0) : Color.FromArgb(255, 0, 0, 0);
-                        aX = p.bmpA != null && p.bmpA.Width > i && p.bmpA.Height > j ? p.bmpA?.GetPixel(i, j) ?? Color.FromArgb(255, 0, 0, 0) : Color.FromArgb(255, 0, 0, 0);
+                        rX = p.bmpR != null && p.bmpR?.Width > i && p.bmpR?.Height > j ? p.bmpR?.GetPixel(i, j) ?? Color.FromArgb(255, 0, 0, 0) : Color.FromArgb(255, 0, 0, 0);
+                        gX = p.bmpG != null && p.bmpG?.Width > i && p.bmpG?.Height > j ? p.bmpG?.GetPixel(i, j) ?? Color.FromArgb(255, 0, 0, 0) : Color.FromArgb(255, 0, 0, 0);
+                        bX = p.bmpB != null && p.bmpB?.Width > i && p.bmpB?.Height > j ? p.bmpB?.GetPixel(i, j) ?? Color.FromArgb(255, 0, 0, 0) : Color.FromArgb(255, 0, 0, 0);
+                        aX = p.bmpA != null && p.bmpA?.Width > i && p.bmpA?.Height > j ? p.bmpA?.GetPixel(i, j) ?? Color.FromArgb(255, 0, 0, 0) : Color.FromArgb(255, 0, 0, 0);
 
                         p.bmpPack.SetPixel(i, j, Color.FromArgb(aX.A, rX.R, gX.G, bX.B));
 
@@ -103,11 +113,16 @@ namespace EasyChannelPacking
                             break;
                     }
 
-                    report = !report;
-                    if (report)
+                    
+                    if (report >= 10)
                     {
                         percent = (progress * 100) / totalprogress;
                         backgroundWorker1.ReportProgress(percent);
+                        report = 0;
+                    }
+                    else
+                    {
+                        report++;
                     }
 
                     if (e.Cancel || cancelWork)
@@ -121,7 +136,6 @@ namespace EasyChannelPacking
             else
             {
                 p.Sucess = true;
-                
             }
             e.Result = p;
         }
@@ -129,10 +143,13 @@ namespace EasyChannelPacking
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
+            this.Text = e.ProgressPercentage + "% - " + WindowText;
+
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            this.Text = WindowText;
             progressBar1.Value = 0;
 
             if (e.Error == null)
@@ -404,5 +421,7 @@ namespace EasyChannelPacking
             if (viewImageA != null)
             viewImageA.Image = inputImageUnpack?.BmpA;
         }
+
+        
     }
 }

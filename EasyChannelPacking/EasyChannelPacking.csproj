@@ -72,6 +72,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Funcoes.cs" />
     <Compile Include="ImageExtension.cs" />
     <Compile Include="InputImage.cs">
       <SubType>UserControl</SubType>
